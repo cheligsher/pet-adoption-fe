@@ -1,11 +1,14 @@
 import React from 'react'
 import PetCard from './PetCard'
+import '../styles/main.css'
 
 function MyPetPage() {
     // define noPets!
   return (
-    <div>
-        {noPets && <h3>You currently have no fostered/ adopted pets </h3>}
+    <div className='text-center mt-5'>
+        {/* {noPets &&  */}
+        <h3>You currently have no fostered/ adopted pets </h3>
+         {/* } */}
         <div>
             <PetCard />
         </div>
