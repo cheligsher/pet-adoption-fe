@@ -9,22 +9,30 @@ import Search from "./components/Search";
 import AppContext from "./context/AppContext";
 
 function App() {
-  const [user, setUser] = useState(true);
-  const [email, setEmail] = useState("c@g.com");
-  const [phone, setPhone] = useState("0123");
-  const [firstName, setFirstName] = useState("Cheli");
-  const [lastName, setLastName] = useState("Sher");
+  const [user, setUser] = useState(false);
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    phone: "",
+    firstName: "",
+    lastName: ""
+  })
+  // const [email, setEmail] = useState("c@g.com");
+  // const [phone, setPhone] = useState("0123");
+  // const [firstName, setFirstName] = useState("Cheli");
+  // const [lastName, setLastName] = useState("Sher");
   const contextValues = {
-    user,
-    setUser,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
+    // user,
+    // setUser,
+    // email,
+    // setEmail,
+    // phone,
+    // setPhone,
+    // firstName,
+    // setFirstName,
+    // lastName,
+    // setLastName,
+    user, setUser,
+    userDetails, setUserDetails
   };
 
   return (

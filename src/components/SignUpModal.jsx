@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+import AppContext from "../context/AppContext";
 
 function SignUpModal({ show, handleClose }) {
+  const { userDetails, setUser } = useContext(AppContext)
+  const handleSignUp = async () => {
+    const res = await axios.post("http://localhost:8080/signup", {
+      email: userDetails.email,
+      phone: userDetails.phone,
+      password: userDetails.password,
+      firstName: userDetails.firstName,
+      lastName: userDetails.lastName
+    })
+    console.log(res.data)
+    setUser(true)
+    handleClose()
+  }
   return (
     <div>
       <Modal centered show={show} onHide={handleClose}>
@@ -69,7 +84,7 @@ function SignUpModal({ show, handleClose }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSignUp}>
             Sign up
           </Button>
         </Modal.Footer>

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import AppContext from "../context/AppContext";
 import "../styles/main.css";
+import ImageGallery from "./ImageGallery";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 
@@ -35,19 +36,20 @@ function Home() {
         , our goal is to provide you with an easy-to-use platform that will help
         pair you up with a fur-friend!
       </p>
-      <p className="fs-2 mb-5">🐾 🐕 🐈 🐇 🐥 🦔 🐾</p>
+      <p className="fs-1 mb-5">🐾 🐕 🐈 🐇 🐥 🦔 🐾</p>
       {!user && (
-        <button className="btn btn-dark me-5" onClick={handleLoginShow}>
+        <button className="btn btn-dark me-5 mb-5 fs-3" onClick={handleLoginShow}>
           Log in
         </button>
       )}
       {!user && (
-        <button className="btn btn-dark" onClick={handleShow}>
+        <button className="btn btn-dark mb-5 fs-3" onClick={handleShow}>
           Sign up
         </button>
       )}
       <SignUpModal show={show} handleClose={handleClose} />
       <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
+      <ImageGallery />
     </div>
   );
 }

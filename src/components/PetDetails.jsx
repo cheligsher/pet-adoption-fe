@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/main.css";
+import axios from "axios";
 
 function PetDetails() {
+  // pet id from props/ context?
+  const getPetDetailsById = async () => {
+    const res = await axios.get("http://localhost:8080/pet/:id")
+    console.log(res)
+  }
+
   return (
     <div>
       <img src="" alt="" />
