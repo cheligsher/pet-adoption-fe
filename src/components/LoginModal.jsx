@@ -6,13 +6,13 @@ import AppContext from "../context/AppContext";
 
 function LoginModal({ showLogin, handleLoginClose }) {
   const { userDetails, setUserDetails, setUser } = useContext(AppContext)
+  const { email, password } = userDetails
 
   const handleLogin = async() => {
     const res = await axios.post("http://localhost:8080/login", {
-      email: userDetails.email,
-      password: userDetails.password
+      email: email,
+      password: password
     })
-    console.log(res.data)
     setUser(true)
     handleLoginClose()
   }
@@ -30,7 +30,7 @@ function LoginModal({ showLogin, handleLoginClose }) {
               name="email"
               placeholder="john@doe.com"
               className="flex-grow-1 ms-3"
-              onChange={(e)=> setUserDetails.email(e.target.value)}
+              onChange={(e)=> setUserDetails({email: e.target.value})}
               value={userDetails.email}
             />
           </div>
@@ -41,7 +41,7 @@ function LoginModal({ showLogin, handleLoginClose }) {
               name="password"
               placeholder="Must be more than 6 char long"
               className="flex-grow-1 ms-3"
-              onChange={(e)=> setUserDetails.password(e.target.value)}
+              onChange={(e)=> setUserDetails({password: e.target.value})}
               value={userDetails.password}
             />
           </div>

@@ -1,15 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/main.css";
 import { useContext } from "react";
 import AppContext from "../context/AppContext";
 
 function Navbar() {
+  const navigate = useNavigate()
   const { user } = useContext(AppContext);
+
+  const handleLogoClick = () => {
+    navigate("/")
+  }
+
   return (
     <div>
       <nav className="nav-bar mx-auto">
-        <ul className="list-unstyled mx-5 d-flex flex-row py-3">
+        <ul className="list-unstyled mx-5 d-flex flex-row py-3 align-items-center">
           <li>
             <NavLink
               to={"/"}
@@ -60,8 +66,10 @@ function Navbar() {
                 Sign Out
               </NavLink>
           </li> */}
-          {/* <img src={require("../images/dog_logo.png")} alt="" width={40} /> */}
-          <div className="ms-auto"></div>
+          
+          <button className="ms-auto" onClick={handleLogoClick}>
+            <img src={require("../images/paw_print.png")} alt="" width={40} />
+          </button>
         </ul>
       </nav>
     </div>
