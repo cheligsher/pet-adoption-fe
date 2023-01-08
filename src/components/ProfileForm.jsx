@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import AppContext from "../context/AppContext";
 
 function ProfileForm() {
-  const { email, phone, firstName, lastName } = useContext(AppContext);
+  const { userDetails } = useContext(AppContext);
+  const { firstName, lastName, email, phone } = userDetails
   const handleSubmit = (e) => {
     e.preventDefault();
     // set states

@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import MyPetPage from "./components/MyPetPage";
 import Navbar from "./components/Navbar";
 import PetPage from "./components/PetPage";
+import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
 import AppContext from "./context/AppContext";
@@ -46,9 +47,30 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/MyPetPage" element={<MyPetPage />}></Route>
-            <Route path="/PetPage" element={<PetPage />}></Route>
-            <Route path="/Profile" element={<Profile />}></Route>
+            <Route
+              path="/MyPetPage"
+              element={
+                <PrivateRoute>
+                  <MyPetPage />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="/PetPage"
+              element={
+                <PrivateRoute>
+                  <PetPage />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="/Profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            ></Route>
             <Route path="/search" element={<Search />}></Route>
           </Routes>
         </BrowserRouter>
