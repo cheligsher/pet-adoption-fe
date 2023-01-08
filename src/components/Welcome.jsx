@@ -1,9 +1,11 @@
 import React, {useContext} from 'react'
 import AppContext from "../context/AppContext";
+import "../styles/main.css";
 
 
 function Welcome({handleLoginShow, handleShow}) {
-    const { firstName, lastName, user } = useContext(AppContext);
+    const { userDetails, user } = useContext(AppContext);
+  const { firstName, lastName } = userDetails
 
   return (
     <div>
@@ -13,7 +15,7 @@ function Welcome({handleLoginShow, handleShow}) {
         </h1>
       )}
       <h1 className="display-3 mb-4">
-        Welcome to{" "}
+        Welcome to {" "}
         <i>
           <b>Adopt A Pet</b>
         </i>
@@ -29,12 +31,12 @@ function Welcome({handleLoginShow, handleShow}) {
       </p>
       <p className="fs-1 mb-5 mt-4">🐾 🐕 🐈 🐇 🐥 🦔 🐾</p>
       {!user && (
-        <button className="btn btn-dark me-5 mb-5 fs-3" onClick={handleLoginShow}>
+        <button className="me-5 mb-5 fs-3 p-1" onClick={handleLoginShow}>
           Log in
         </button>
       )}
       {!user && (
-        <button className="btn btn-dark mb-5 fs-3" onClick={handleShow}>
+        <button className="mb-5 fs-3 p-1" onClick={handleShow}>
           Sign up
         </button>
       )}

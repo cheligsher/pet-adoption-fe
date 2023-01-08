@@ -5,12 +5,12 @@ import { useContext } from "react";
 import AppContext from "../context/AppContext";
 
 function Navbar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user } = useContext(AppContext);
 
   const handleLogoClick = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   return (
     <div>
@@ -57,19 +57,21 @@ function Navbar() {
             </NavLink>
           </li>
 
-          {/* <li>
+          <div className="ms-auto d-flex flex-row align-items-center">
+            {!user && <li className="me-3">
+              {/* link to log in and sign up!!!!!!!!!! */}
               <NavLink
-              onClick={}
-                className="px-3 text-decoration-none py-3 link align-middle"
+                to={"/"}
+                className="px-3 text-decoration-none py-3 align-middle text-light"
                 activeClassName="active"
               >
-                Sign Out
+                Log in/ Sign up
               </NavLink>
-          </li> */}
-          
-          <button className="ms-auto" onClick={handleLogoClick}>
-            <img src={require("../images/paw_print.png")} alt="" width={40} />
-          </button>
+            </li>}
+            <button onClick={handleLogoClick}>
+              <img src={require("../images/paw_print.png")} alt="" width={40} />
+            </button>
+          </div>
         </ul>
       </nav>
     </div>

@@ -10,7 +10,7 @@ function SearchBar() {
           placeholder="Search"
         />
         <button
-          className="btn btn-outline-dark btn-dark text-light"
+          className=" btn-outline-dark text-light"
           type="submit"
         >
           Search

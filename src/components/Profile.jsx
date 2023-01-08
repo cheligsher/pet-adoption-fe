@@ -4,7 +4,8 @@ import { useContext } from "react";
 import AppContext from "../context/AppContext";
 
 function Profile() {
-  const { firstName, lastName } = useContext(AppContext);
+  const { userDetails } = useContext(AppContext);
+  const { firstName, lastName } = userDetails
   return (
     <div className="text-center mt-5">
       <h3>

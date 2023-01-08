@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AppContext from "../context/AppContext";
 import "../styles/main.css";
 import ImageGallery from "./ImageGallery";
 import LoginModal from "./LoginModal";

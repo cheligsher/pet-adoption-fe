@@ -14,8 +14,10 @@ function App() {
     email: "",
     phone: "",
     firstName: "",
-    lastName: ""
-  })
+    lastName: "",
+    password: "",
+    repassword: "",
+  });
   // const [email, setEmail] = useState("c@g.com");
   // const [phone, setPhone] = useState("0123");
   // const [firstName, setFirstName] = useState("Cheli");
@@ -31,8 +33,10 @@ function App() {
     // setFirstName,
     // lastName,
     // setLastName,
-    user, setUser,
-    userDetails, setUserDetails
+    user,
+    setUser,
+    userDetails,
+    setUserDetails,
   };
 
   return (
