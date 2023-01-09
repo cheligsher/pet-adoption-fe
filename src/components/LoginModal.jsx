@@ -10,13 +10,20 @@ function LoginModal({ showLogin, handleLoginClose }) {
   const { email, password } = userDetails;
 
   const handleLogin = async () => {
-    console.log(email, password);
+    try{
     const res = await axios.post("http://localhost:8080/user/login", {
       email: email,
       password: password,
     });
-    setUser(true);
-    handleLoginClose();
+    if(res.data.token){
+      console.log(res.data.token)
+      localStorage.setItem("token", JSON.stringify(res.data.token));
+      setUser(true);
+      handleLoginClose();
+    } 
+  }catch(err) {
+      console.log(err)
+    }
   };
   return (
     <div>

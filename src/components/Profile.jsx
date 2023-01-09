@@ -7,7 +7,7 @@ function Profile() {
   const { userDetails } = useContext(AppContext);
   const { firstName, lastName } = userDetails
   return (
-    <div className="text-center mt-5">
+    <div className="mt-5 w-50 mx-auto">
       <h3>
         Welcome to your profile {firstName} {lastName} 🐾
       </h3>
