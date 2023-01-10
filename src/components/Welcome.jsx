@@ -17,7 +17,7 @@ function Welcome({handleLoginShow, handleShow}) {
       <h1 className="display-3 mb-4">
         Welcome to {" "}
         <i>
-          <b>Adopt A Pet</b>
+          <b id="adopt-a-pet">Adopt A Pet</b>
         </i>
         !
       </h1>
@@ -31,12 +31,12 @@ function Welcome({handleLoginShow, handleShow}) {
       </p>
       <p className="fs-1 mb-5 mt-4">🐾 🐕 🐈 🐇 🐥 🦔 🐾</p>
       {!user && (
-        <button className="me-5 mb-5 fs-3 p-1" onClick={handleLoginShow}>
+        <button className="me-5 mb-5 fs-3" onClick={handleLoginShow}>
           Log in
         </button>
       )}
       {!user && (
-        <button className="mb-5 fs-3 p-1" onClick={handleShow}>
+        <button className="mb-5 fs-3" onClick={handleShow}>
           Sign up
         </button>
       )}

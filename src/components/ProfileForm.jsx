@@ -55,7 +55,9 @@ function ProfileForm() {
           <Form.Control type="password" placeholder="Your new password" />
         </Form.Group>
 
-        <button className="btn btn-dark me-5 mt-3" onClick={handleSubmit}>
+        {/* add bio etc! */}
+
+        <button className="me-5 mt-3" onClick={handleSubmit}>
           Update profile
         </button>
       </Form>

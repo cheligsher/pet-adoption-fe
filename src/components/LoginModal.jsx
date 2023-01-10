@@ -52,9 +52,8 @@ function LoginModal({ showLogin, handleLoginClose }) {
           <Button variant="secondary" onClick={handleLoginClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleLogin}>
-            Log in
-          </Button>
+          <button onClick={handleLogin}>Log in</button> 
+            
         </Modal.Footer>
       </Modal>
     </div>

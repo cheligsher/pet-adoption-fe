@@ -8,9 +8,15 @@ button{
     border: 0;
     color: white;
     cursor: pointer;
+    padding: 7px;
 }
 
 .nav-bar > ul > div > button {
     background: transparent;
     border: none;
+    padding: 0;
+}
+
+#adopt-a-pet {
+    text-shadow: 4px 4px 5px #deb887;
 }

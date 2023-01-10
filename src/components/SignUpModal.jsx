@@ -30,12 +30,12 @@ function SignUpModal({ show, handleClose }) {
         <Modal.Body>
         <Form className="d-flex flex-column">
             <div className="d-flex flex-row justify-content-between">
-            <Form.Group className="mb-3" controlId="formBasicText">
+            <Form.Group className="mb-3 flex-fill" controlId="formBasicText">
               <Form.Label>First name</Form.Label>
               <Form.Control type="text" placeholder="Enter your first name" onChange={(e)=> setUserDetails({...userDetails, firstName: e.target.value})} />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicText">
+            <Form.Group className="mb-3 flex-fill" controlId="formBasicText">
               <Form.Label>Last name</Form.Label>
               <Form.Control type="text" placeholder="Enter your last name" onChange={(e)=> setUserDetails({...userDetails, lastName: e.target.value})}/>
             </Form.Group>
@@ -122,9 +122,9 @@ function SignUpModal({ show, handleClose }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSignUp}>
+          <button onClick={handleSignUp}>
             Sign up
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </div>
