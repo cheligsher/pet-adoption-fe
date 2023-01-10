@@ -5,7 +5,7 @@ import AppContext from "../context/AppContext";
 
 function Profile() {
   const { userDetails } = useContext(AppContext);
-  const { firstName, lastName } = userDetails
+  const { firstName, lastName } = userDetails;
   return (
     <div className="mt-5 w-50 mx-auto">
       <h3>

@@ -9,10 +9,7 @@ function SearchBar() {
           type="search"
           placeholder="Search"
         />
-        <button
-          className=" btn-outline-dark text-light"
-          type="submit"
-        >
+        <button className=" btn-outline-dark text-light" type="submit">
           Search
         </button>
       </form>

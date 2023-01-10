@@ -58,16 +58,6 @@ function Navbar() {
           </li>
 
           <div className="ms-auto d-flex flex-row align-items-center">
-            {!user && <li className="me-3">
-              {/* link to log in and sign up!!!!!!!!!! */}
-              <NavLink
-                to={"/"}
-                className="px-3 text-decoration-none py-3 align-middle text-light"
-                activeClassName="active"
-              >
-                Log in/ Sign up
-              </NavLink>
-            </li>}
             <button onClick={handleLogoClick}>
               <img src={require("../images/paw_print.png")} alt="" width={40} />
             </button>

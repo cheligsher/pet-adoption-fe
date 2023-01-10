@@ -1,21 +1,20 @@
-import React, {useContext} from 'react'
+import React, { useContext } from "react";
 import AppContext from "../context/AppContext";
 import "../styles/main.css";
 
-
-function Welcome({handleLoginShow, handleShow}) {
-    const { userDetails, user } = useContext(AppContext);
-  const { firstName, lastName } = userDetails
+function Welcome({ handleLoginShow, handleShow }) {
+  const { userDetails, user } = useContext(AppContext);
+  const { firstName, lastName } = userDetails;
 
   return (
     <div>
-        {user && (
+      {user && (
         <h1>
           Hi {firstName} {lastName}!
         </h1>
       )}
       <h1 className="display-3 mb-4">
-        Welcome to {" "}
+        Welcome to{" "}
         <i>
           <b id="adopt-a-pet">Adopt A Pet</b>
         </i>
@@ -41,7 +40,7 @@ function Welcome({handleLoginShow, handleShow}) {
         </button>
       )}
     </div>
-  )
+  );
 }
 
-export default Welcome
+export default Welcome;

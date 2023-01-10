@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import AppContext from "../context/AppContext";
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useContext(AppContext)
+  const { user } = useContext(AppContext);
   return user ? children : <Navigate to="/"></Navigate>;
 };
 
