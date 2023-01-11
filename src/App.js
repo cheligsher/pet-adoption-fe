@@ -19,21 +19,7 @@ function App() {
     password: "",
     repassword: "",
   });
-  // const [email, setEmail] = useState("c@g.com");
-  // const [phone, setPhone] = useState("0123");
-  // const [firstName, setFirstName] = useState("Cheli");
-  // const [lastName, setLastName] = useState("Sher");
   const contextValues = {
-    // user,
-    // setUser,
-    // email,
-    // setEmail,
-    // phone,
-    // setPhone,
-    // firstName,
-    // setFirstName,
-    // lastName,
-    // setLastName,
     user,
     setUser,
     userDetails,

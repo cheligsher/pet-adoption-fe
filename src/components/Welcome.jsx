@@ -9,11 +9,11 @@ function Welcome({ handleLoginShow, handleShow }) {
   return (
     <div>
       {user && (
-        <h1>
+        <h1 className="pt-4">
           Hi {firstName} {lastName}!
         </h1>
       )}
-      <h1 className="display-3 mb-4">
+      <h1 className="display-3 mb-4 pt-4">
         Welcome to{" "}
         <i>
           <b id="adopt-a-pet">Adopt A Pet</b>
@@ -28,7 +28,8 @@ function Welcome({ handleLoginShow, handleShow }) {
         , our goal is to provide you with an easy-to-use platform that will help
         pair you up with a fur-friend!
       </p>
-      <p className="fs-1 mb-5 mt-4">🐾 🐕 🐈 🐇 🐥 🦔 🐾</p>
+      <div className="mb-5"><span className="fs-1">🐾</span><span className="fs-1 ms-5 me-5">🐾</span><span className="fs-1">🐾</span></div>
+      
       {!user && (
         <button className="me-5 mb-5 fs-3" onClick={handleLoginShow}>
           Log in

@@ -22,7 +22,8 @@ function LoginModal({ showLogin, handleLoginClose }) {
         handleLoginClose();
       }
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      alert(err.response.data)
     }
   };
   return (

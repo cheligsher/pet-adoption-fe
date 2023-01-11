@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/main.css";
-import ImageGallery from "./ImageGallery";
+import QuoteGallery from "./QuoteGallery";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import Welcome from "./Welcome";
@@ -18,7 +18,7 @@ function Home() {
       <Welcome handleShow={handleShow} handleLoginShow={handleLoginShow} />
       <SignUpModal show={show} handleClose={handleClose} />
       <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
-      <ImageGallery />
+      {/* <QuoteGallery /> */}
     </div>
   );
 }

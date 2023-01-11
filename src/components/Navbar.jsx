@@ -6,11 +6,17 @@ import AppContext from "../context/AppContext";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { user } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
 
   const handleLogoClick = () => {
     navigate("/");
   };
+
+  const handleLogOut = () => {
+    alert("You have successfully signed out. See you soon!")
+    setUser(false)
+    navigate("/")
+  }
 
   return (
     <div>
@@ -58,6 +64,16 @@ function Navbar() {
           </li>
 
           <div className="ms-auto d-flex flex-row align-items-center">
+            {user && (
+              <li>
+                <button
+                  onClick={handleLogOut}
+                  className="px-3 text-decoration-none py-3 align-middle text-light"
+                >
+                  Log Out
+                </button>
+              </li>
+            )}
             <button onClick={handleLogoClick}>
               <img src={require("../images/paw_print.png")} alt="" width={40} />
             </button>

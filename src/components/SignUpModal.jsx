@@ -8,6 +8,7 @@ import AppContext from "../context/AppContext";
 function SignUpModal({ show, handleClose }) {
   const { userDetails, setUser, setUserDetails } = useContext(AppContext);
   const handleSignUp = async () => {
+    try{
     const res = await axios.post("http://localhost:8080/user/signup", {
       email: userDetails.email,
       phone: userDetails.phone,
@@ -16,9 +17,12 @@ function SignUpModal({ show, handleClose }) {
       firstName: userDetails.firstName,
       lastName: userDetails.lastName,
     });
-    console.log(res.data);
     setUser(true);
     handleClose();
+  } catch(err){
+    alert(err.response.data);
+  }
+  
   };
 
   return (
