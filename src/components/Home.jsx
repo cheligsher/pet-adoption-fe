@@ -16,7 +16,7 @@ function Home() {
   return (
     <div className="mx-auto text-center mt-5">
       <Welcome handleShow={handleShow} handleLoginShow={handleLoginShow} />
-      <SignUpModal show={show} handleClose={handleClose} />
+      <SignUpModal show={show} handleLoginShow={handleLoginShow} handleClose={handleClose} />
       <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
       {/* <QuoteGallery /> */}
     </div>

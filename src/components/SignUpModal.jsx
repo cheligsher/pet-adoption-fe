@@ -5,8 +5,8 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import AppContext from "../context/AppContext";
 
-function SignUpModal({ show, handleClose }) {
-  const { userDetails, setUser, setUserDetails } = useContext(AppContext);
+function SignUpModal({ show, handleClose, handleLoginShow }) {
+  const { userDetails, setUser, setUserDetails } = useContext(AppContext)
   const handleSignUp = async () => {
     try{
     const res = await axios.post("http://localhost:8080/user/signup", {
@@ -19,11 +19,13 @@ function SignUpModal({ show, handleClose }) {
     });
     setUser(true);
     handleClose();
+    handleLoginShow()
   } catch(err){
     alert(err.response.data);
+      lastName: userDetails.lastName
+    }
+    
   }
-  
-  };
 
   return (
     <div>
