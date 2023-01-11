@@ -22,7 +22,6 @@ function SignUpModal({ show, handleClose, handleLoginShow }) {
     handleLoginShow()
   } catch(err){
     alert(err.response.data);
-      lastName: userDetails.lastName
     }
     
   }

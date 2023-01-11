@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AddPet from "./components/AddPet";
 import Home from "./components/Home";
 import MyPetPage from "./components/MyPetPage";
 import Navbar from "./components/Navbar";
@@ -58,6 +59,7 @@ function App() {
               }
             ></Route>
             <Route path="/search" element={<Search />}></Route>
+            <Route path="/addpet" element={<AddPet />}></Route>
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

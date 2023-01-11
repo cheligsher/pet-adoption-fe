@@ -5,7 +5,8 @@ import axios from "axios";
 function PetDetails() {
   // pet id from props/ context?
   const getPetDetailsById = async () => {
-    const res = await axios.get("http://localhost:8080/pet/:id");
+    const token = localStorage.getItem('token')
+    const res = await axios.get("http://localhost:8080/pet/:id", {headers: {authorization: `Bearer ${token}`}});
     console.log(res);
   };
 
