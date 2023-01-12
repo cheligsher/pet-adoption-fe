@@ -16,13 +16,15 @@ function LoginModal({ showLogin, handleLoginClose }) {
         password: password,
       });
       if (res.data.token) {
+        console.log("there's a token")
         localStorage.setItem("token", JSON.stringify(res.data.token));
         setUser(true);
         handleLoginClose();
       }
     } catch (err) {
       console.log(err)
-      alert(err.response.data)
+      if(err.response) {
+        alert(err.response.data)}
     }
   };
   return (

@@ -11,10 +11,10 @@ function PetCard() {
       <div>I am currently being fostered</div>
       {/* } */}
       {/* {adopted &&  */}
-      <div>I have being adopted</div>
+      <div>I have been adopted</div>
       {/* } */}
       {/* {!fostered && !adopted ?  */}
-      <div>I am available for fostering and adopting!</div>
+      {/* <div>I am available for fostering and adopting!</div> */}
       {/* : ""} */}
       <button className="btn btn-dark">More info</button>
     </div>

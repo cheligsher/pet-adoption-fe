@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddPet from "./components/AddPet";
+import Dashboard from "./components/Dashboard";
 import Home from "./components/Home";
 import MyPetPage from "./components/MyPetPage";
 import Navbar from "./components/Navbar";
@@ -20,11 +21,26 @@ function App() {
     password: "",
     repassword: "",
   });
+  const [petDetails, setPetDetails] = useState({
+    type: "",
+    name: "",
+    breed: "",
+    adoptionStatus: "",
+    picture: "",
+    height: "",
+    weight: "",
+    hypoallergenic: false,
+    color: "",
+    bio: "",
+    dietary: ""
+  })
   const contextValues = {
     user,
     setUser,
     userDetails,
     setUserDetails,
+    petDetails,
+    setPetDetails
   };
 
   return (
@@ -60,6 +76,7 @@ function App() {
             ></Route>
             <Route path="/search" element={<Search />}></Route>
             <Route path="/addpet" element={<AddPet />}></Route>
+            <Route path="/dash" element={<Dashboard />}></Route>
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

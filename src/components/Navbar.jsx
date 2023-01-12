@@ -62,6 +62,15 @@ function Navbar() {
               Search
             </NavLink>
           </li>
+          {user && <li>
+            <NavLink
+              to={"/addpet"}
+              className="px-3 text-decoration-none py-3 align-middle text-light"
+              activeClassName="active"
+            >
+              Add Pet
+            </NavLink>
+          </li>}
 
           <div className="ms-auto d-flex flex-row align-items-center">
             {user && (

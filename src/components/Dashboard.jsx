@@ -1,13 +1,13 @@
 import React from 'react'
+import Pets from './Pets'
+import Users from './Users'
 
 function Dashboard() {
-    const getAllUsers = () => {
-        //axios to BE route for getting all users
-    }
-
+    
   return (
     <div>
-        
+        <Pets />
+        <Users />
     </div>
   )
 }
