@@ -16,7 +16,6 @@ function LoginModal({ showLogin, handleLoginClose }) {
         password: password,
       });
       if (res.data.token) {
-        console.log(res.data.token);
         localStorage.setItem("token", JSON.stringify(res.data.token));
         setUser(true);
         handleLoginClose();
