@@ -5,8 +5,8 @@ import "../styles/main.css";
 function PetPage() {
   return (
     <div>
-      <h3>Pet Details</h3>
-      <PetDetails />
+      {/* <h3>Pet Details</h3>
+      <PetDetails /> */}
       {/* {fostered || adopted ?  */}
       <button>Return pet</button>
       {/* : ""} */}
