@@ -72,6 +72,16 @@ function Navbar() {
             </NavLink>
           </li>}
 
+          {user && <li>
+            <NavLink
+              to={"/dash"}
+              className="px-3 text-decoration-none py-3 align-middle text-light"
+              activeClassName="active"
+            >
+              Dashboard
+            </NavLink>
+          </li>}
+
           <div className="ms-auto d-flex flex-row align-items-center">
             {user && (
               <li>

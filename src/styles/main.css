@@ -21,3 +21,7 @@ button {
 #adopt-a-pet {
   text-shadow: 4px 4px 5px #deb887;
 }
+
+.link-secondary{
+  cursor: pointer;
+}

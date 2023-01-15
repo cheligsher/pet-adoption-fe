@@ -17,7 +17,6 @@ function PetDetails() {
       headers: { authorization: `Bearer ${token}` },
     });
     setPet(res.data);
-    console.log(res.data);
   };
 
   useEffect(() => {

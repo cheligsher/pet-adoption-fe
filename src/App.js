@@ -75,8 +75,8 @@ function App() {
               }
             ></Route>
             <Route path="/search" element={<Search />}></Route>
-            <Route path="/addpet" element={<AddPet />}></Route>
-            <Route path="/dash" element={<Dashboard />}></Route>
+            <Route path="/addpet" element={<PrivateRoute><AddPet /></PrivateRoute>}></Route>
+            <Route path="/dash" element={<PrivateRoute><Dashboard /></PrivateRoute>}></Route>
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>
