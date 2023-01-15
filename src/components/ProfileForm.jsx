@@ -1,13 +1,29 @@
 import React, { useContext } from "react";
 import AppContext from "../context/AppContext";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
 
 function ProfileForm() {
-  const { userDetails } = useContext(AppContext);
+  const { userDetails, setUserDetails } = useContext(AppContext);
   const { firstName, lastName, email, phone } = userDetails;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // set states
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const userId = "63c4142330dc3adac282631a"
+      const token = localStorage.getItem("token");
+      const updatedUser = {
+        firstName,
+        lastName,
+        email,
+        phone
+      }
+      const user = await axios.put(`http://localhost:8080/user/${userId}`,updatedUser,{
+        headers: { authorization: `Bearer ${token}` },
+      })
+      console.log(user)
+    } catch (err) {
+      console.log(err)
+    }
   };
   return (
     <div>
@@ -19,6 +35,12 @@ function ProfileForm() {
               type="text"
               placeholder="Your first name"
               value={firstName}
+              onChange={(e) =>
+                setUserDetails({
+                  ...userDetails,
+                  firstName: e.target.value,
+                })
+              }
             />
           </Form.Group>
 
@@ -28,13 +50,24 @@ function ProfileForm() {
               type="text"
               placeholder="Your last name"
               value={lastName}
+              onChange={(e) =>
+                setUserDetails({
+                  ...userDetails,
+                  lastName: e.target.value,
+                })
+              }
             />
           </Form.Group>
         </div>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Your email" value={email} />
+          <Form.Control type="email" placeholder="Your email" value={email} onChange={(e) =>
+                    setUserDetails({
+                      ...userDetails,
+                      email: e.target.value,
+                    })
+                  }/>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPhone">
@@ -43,6 +76,12 @@ function ProfileForm() {
             type="number"
             placeholder="Your phone number"
             value={phone}
+            onChange={(e) =>
+              setUserDetails({
+                ...userDetails,
+                phone: e.target.value,
+              })
+            }
           />
         </Form.Group>
 
