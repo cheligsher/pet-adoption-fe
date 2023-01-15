@@ -1,14 +1,55 @@
-import React from 'react'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function Users() {
-    const getAllUsers = () => {
-        //axios to BE route for getting all users
+  const [users, setUsers] = useState([]);
+  const getAllUsers = async() => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      const allUsers = await axios.get("http://localhost:8080/user", {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      setUsers(allUsers.data);
+    } catch (err) {
+      console.log(err.message);
     }
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
   return (
     <div>
-        
+        <h3 className="text-center mx-auto">Users</h3>
+      <table className="table w-75 mx-auto">
+        <thead>
+          <tr>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">.</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.length &&
+            users.map((user) => {
+              return (
+                <tr>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.email}</td>
+                  {/* can access _id. check id _id = fetch id */}
+                  <button className="btn btn-dark">See more</button>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }
 
-export default Users
+export default Users;
