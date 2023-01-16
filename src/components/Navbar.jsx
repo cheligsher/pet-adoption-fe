@@ -15,6 +15,7 @@ function Navbar() {
   const handleLogOut = () => {
     alert("You have successfully signed out. See you soon!")
     setUser(false)
+    localStorage.clear()
     navigate("/")
   }
 

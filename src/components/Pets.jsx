@@ -22,8 +22,7 @@ function Pets() {
   // link to PetDetails on click
   return (
     <div>
-    <PetTable pets={pets}/>
-    <PetDetails/>
+    <PetTable pets={pets} />
     </div>
   );
 }

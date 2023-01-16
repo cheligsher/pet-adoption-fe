@@ -26,10 +26,14 @@ button {
   cursor: pointer;
 }
 
-.table-div{
+/* .table-div{
   overflow-y: auto;
   height: 30vh;
   padding: 0 10px 10px; 
+} */
+
+.container > .col {
+  width: 200px;
 }
 
 #pet-picture{

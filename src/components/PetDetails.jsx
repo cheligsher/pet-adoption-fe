@@ -5,11 +5,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 
-function PetDetails() {
-  const [pet, setPet] = useState({});
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+function PetDetails({handleClose, show}) {
+  const [pet, setPet] = useState({});  
 
   const getPetDetailsById = async () => {
     const id = "63c5399906beafdeb03d58d7";
@@ -26,9 +23,6 @@ function PetDetails() {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -36,17 +30,26 @@ function PetDetails() {
         </Modal.Header>
         <Modal.Body>
           {pet && (
-            <div id="pet-details">
+            <div id="pet-details d-flex">
               <img src={pet.picture} alt="" id="pet-picture" />
-              <div>Type: {pet.type}</div>
+              <div className="d-flex flex-row justify-content-evenly mt-3">
+
               <div>Name: {pet.name}</div>
               <div>Status: {pet.adoptionStatus}</div>
+              </div>
+              <div className="d-flex flex-row justify-content-evenly">
+
+              <div>Type: {pet.type}</div>
+              <div>Breed: {pet.breed}</div>
+              </div>
+              <div className="d-flex flex-row justify-content-evenly">
+
               <div>Height: {pet.height}</div>
               <div>Weight: {pet.weight}</div>
+              </div>
               <div>Colour: {pet.color}</div>
               <div>Hypoallergenic: {pet.hypoallergenic}</div>
               <div>Dietary Restrictions: {pet.dietary}</div>
-              <div>Breed: {pet.breed}</div>
               <div>Bio: {pet.bio}</div>
             </div>
           )}

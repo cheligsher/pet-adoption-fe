@@ -1,41 +1,42 @@
-import React from 'react'
+import React, { useState } from "react";
+import PetDetails from "./PetDetails";
+import '../styles/main.css'
 
-function PetTable({pets}) {
+function PetTable({ pets }) {
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+
   const handleShowDetails = () => {
-    console.log("clicked")
-  }
+    console.log("clicked");
+  };
   return (
-    <div><h3 className="text-center mx-auto">Pets</h3>
-    <div className='table-div'>
-
-      <table className="table w-75 mx-auto">
-    <thead>
-      <tr>
-        <th scope="col">Type</th>
-        <th scope="col">Name</th>
-        <th scope="col">Breed</th>
-        <th scope="col">Status</th>
-        <th scope="col">.</th>
-      </tr>
-    </thead>
-    <tbody>
-      {pets.length &&
-        pets.map((pet) => {
-          return (
-            <tr>
-              <td>{pet.type}</td>
-              <td>{pet.name}</td>
-              <td>{pet.breed}</td>
-              <td>{pet.adoptionStatus}</td>
-              {/* can access _id. check id _id = fetch id */}
-              <td onClick={handleShowDetails}><a className="link-secondary">Details</a></td>
-            </tr>
-          );
-        })}
-    </tbody>
-  </table></div></div>
-    
-  )
+    <div>
+      <h3 className="text-center mx-auto">Pets</h3>
+      <div className="table-div">
+        <div class="container text-center">
+          <div class="row">
+            {pets.length &&
+              pets.map((pet) => {
+                return (
+                  <div className="col mt-5 mb-5 me-2 border border-dark">
+                    <div>{pet.type}</div>
+                    <div>{pet.name}</div>
+                    <div>{pet.breed}</div>
+                    <div>{pet.adoptionStatus}</div>
+                    {/* can access _id. check id _id = fetch id */}
+                    <button onClick={handleShow}>
+                      Details
+                    </button>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      </div>
+      <PetDetails handleClose={handleClose} show={show} />
+    </div>
+  );
 }
 
-export default PetTable
+export default PetTable;

@@ -10,7 +10,7 @@ function ProfileForm() {
     e.preventDefault()
     try {
       const userId = "63c4142330dc3adac282631a"
-      const token = localStorage.getItem("token");
+      const token = JSON.parse(localStorage.getItem("token"));
       const updatedUser = {
         firstName,
         lastName,
