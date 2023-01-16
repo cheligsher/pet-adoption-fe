@@ -8,7 +8,7 @@ function Search() {
 
   const getAllPets = async () => {
     try {
-      const allPets = await axios.get("http://localhost:8080/pet");
+      const allPets = await axios.get(`http://localhost:8080/pet?${query}`);
       setPetList(allPets.data);
     } catch (err) {
       console.log(err.message);
@@ -17,7 +17,7 @@ function Search() {
 
   useEffect(() => {
     getAllPets();
-  }, []);
+  }, [query]);
 
   return (
     <div className="w-75 text-center mx-auto mt-5">
@@ -41,14 +41,16 @@ function Search() {
       </form>
       <ul className="list-group list-group-flush">
         {petList.length &&
-          petList.filter((pet)=> pet.breed.toLowerCase().includes(query))
+          petList
+          .filter((pet)=> pet.breed.toLowerCase().includes(query))
           .map((pet) => {
             return(
             <li key={pet._id} className="list-group-item">
               {pet.breed}
             </li>
             )
-          })}
+          })
+          }
       </ul>
     </div>
   );
