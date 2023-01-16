@@ -25,3 +25,10 @@ button {
 .link-secondary{
   cursor: pointer;
 }
+
+.table-div{
+  overflow-y: auto;
+  height: 30vh;
+  padding: 0 10px 10px;
+  
+}

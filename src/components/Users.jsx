@@ -21,7 +21,8 @@ function Users() {
 
   return (
     <div>
-        <h3 className="text-center mx-auto">Users</h3>
+ <h3 className="text-center mx-auto">Users</h3>
+    <div className='table-div'>
       <table className="table w-75 mx-auto">
         <thead>
           <tr>
@@ -49,6 +50,8 @@ function Users() {
         </tbody>
       </table>
     </div>
+    </div>
+       
   );
 }
 

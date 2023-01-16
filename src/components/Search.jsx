@@ -19,6 +19,8 @@ function Search() {
     getAllPets();
   }, [query]);
 
+
+  // when search, click on pet => navigate to pet page using _id
   return (
     <div className="w-75 text-center mx-auto mt-5">
       <h1 className="display-4 mb-3">

@@ -5,8 +5,8 @@ function PetTable({pets}) {
     console.log("clicked")
   }
   return (
-    <div>
-              <h3 className="text-center mx-auto">Pets</h3>
+    <div><h3 className="text-center mx-auto">Pets</h3>
+    <div className='table-div'>
 
       <table className="table w-75 mx-auto">
     <thead>
@@ -33,7 +33,8 @@ function PetTable({pets}) {
           );
         })}
     </tbody>
-  </table></div>
+  </table></div></div>
+    
   )
 }
 
