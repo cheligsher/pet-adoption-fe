@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import AppContext from "../context/AppContext";
 
@@ -19,10 +19,25 @@ function AddPet() {
     bio,
     dietary,
   } = petDetails;
+  const [petImage, setPetImage] = useState("")
   const handleAddPet = async () => {
     try {
+
+      const petData = new FormData();
+    petData.append('picture', petImage);
+    petData.append('type', type)
+    petData.append('name', name)
+    petData.append('breed', breed)
+    petData.append('adoptionStatus', adoptionStatus)
+    petData.append('height', height)
+    petData.append('weight', weight)
+    petData.append('hypoallergenic', hypoallergenic)
+    petData.append('color', color)
+    petData.append('bio', bio)
+    petData.append('dietary', dietary)
+
       const token = JSON.parse(localStorage.getItem("token"));
-      const res = await axios.post("http://localhost:8080/pet", petDetails, {
+      const res = await axios.post("http://localhost:8080/pet", petData, {
         headers: { authorization: `Bearer ${token}` },
       });
       console.log(res.data);
@@ -106,12 +121,14 @@ function AddPet() {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Picture</Form.Label>
-          <input type="file" value={picture} class="form-control" onChange={(e) =>
-              setPetDetails({
-                ...petDetails,
-                picture: e.target.files,
-              })
-            }/>
+          <input type="file" class="form-control" 
+          // onChange={(e) =>
+          //     setPetDetails({
+          //       ...petDetails,
+          //       picture: e.target.files,
+          //     })
+          //   }
+            onChange={(e) => setPetImage(e.target.files[0])} accept="image/*"></input>
         </Form.Group>
         <div className="d-flex flex-row">
           <Form.Group className="mb-3 me-3 flex-fill">

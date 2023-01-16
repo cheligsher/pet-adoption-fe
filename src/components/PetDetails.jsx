@@ -4,6 +4,7 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
+
 function PetDetails() {
   const [pet, setPet] = useState({});
   const [show, setShow] = useState(false);
@@ -11,7 +12,7 @@ function PetDetails() {
   const handleShow = () => setShow(true);
 
   const getPetDetailsById = async () => {
-    const id = "63c1516832359b9d39efe089";
+    const id = "63c5399906beafdeb03d58d7";
     const token = localStorage.getItem("token");
     const res = await axios.get(`http://localhost:8080/pet/${id}`, {
       headers: { authorization: `Bearer ${token}` },
@@ -35,8 +36,8 @@ function PetDetails() {
         </Modal.Header>
         <Modal.Body>
           {pet && (
-            <div>
-              <img src="" alt="" />
+            <div id="pet-details">
+              <img src={pet.picture} alt="" id="pet-picture" />
               <div>Type: {pet.type}</div>
               <div>Name: {pet.name}</div>
               <div>Status: {pet.adoptionStatus}</div>

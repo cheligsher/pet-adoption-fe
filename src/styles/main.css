@@ -29,6 +29,11 @@ button {
 .table-div{
   overflow-y: auto;
   height: 30vh;
-  padding: 0 10px 10px;
-  
+  padding: 0 10px 10px; 
+}
+
+#pet-picture{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
