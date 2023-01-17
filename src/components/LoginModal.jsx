@@ -16,11 +16,11 @@ function LoginModal({ showLogin, handleLoginClose }) {
         password: password,
       });
       if (res.data.token) {
-        console.log("there's a token")
         localStorage.setItem("token", JSON.stringify(res.data.token));
         setUser(true);
         handleLoginClose();
       }
+      setUserDetails({...userDetails, userId: res.data.userId})
     } catch (err) {
       console.log(err)
       if(err.response) {

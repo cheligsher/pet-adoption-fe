@@ -6,9 +6,11 @@ function PetTable({ pets }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
+  const [selectedPet, setSelectedPet] = useState("")
 
-  const handleShowDetails = () => {
-    console.log("clicked");
+  const handleShowDetails = (pet) => {
+   handleShow()
+   setSelectedPet(pet)
   };
   return (
     <div>
@@ -19,13 +21,12 @@ function PetTable({ pets }) {
             {pets.length &&
               pets.map((pet) => {
                 return (
-                  <div className="col mt-5 mb-5 me-2 border border-dark">
+                  <div className="col mt-5 me-2 border border-dark">
                     <div>{pet.type}</div>
                     <div>{pet.name}</div>
                     <div>{pet.breed}</div>
                     <div>{pet.adoptionStatus}</div>
-                    {/* can access _id. check id _id = fetch id */}
-                    <button onClick={handleShow}>
+                    <button onClick={()=>handleShowDetails(pet)}>
                       Details
                     </button>
                   </div>
@@ -34,7 +35,7 @@ function PetTable({ pets }) {
           </div>
         </div>
       </div>
-      <PetDetails handleClose={handleClose} show={show} />
+      <PetDetails handleClose={handleClose} show={show} selectedPet={selectedPet}/>
     </div>
   );
 }

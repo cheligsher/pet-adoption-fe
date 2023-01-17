@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import AppContext from "../context/AppContext";
 
 function AddPet() {
-    // move state here
+  // move state here
   const { petDetails, setPetDetails } = useContext(AppContext);
   const {
     type,
@@ -19,28 +19,39 @@ function AddPet() {
     bio,
     dietary,
   } = petDetails;
-  const [petImage, setPetImage] = useState("")
+  const [petImage, setPetImage] = useState("");
   const handleAddPet = async () => {
     try {
-
       const petData = new FormData();
-    petData.append('picture', petImage);
-    petData.append('type', type)
-    petData.append('name', name)
-    petData.append('breed', breed)
-    petData.append('adoptionStatus', adoptionStatus)
-    petData.append('height', height)
-    petData.append('weight', weight)
-    petData.append('hypoallergenic', hypoallergenic)
-    petData.append('color', color)
-    petData.append('bio', bio)
-    petData.append('dietary', dietary)
+      petData.append("picture", petImage);
+      petData.append("type", type);
+      petData.append("name", name);
+      petData.append("breed", breed);
+      petData.append("adoptionStatus", adoptionStatus);
+      petData.append("height", height);
+      petData.append("weight", weight);
+      petData.append("hypoallergenic", hypoallergenic);
+      petData.append("color", color);
+      petData.append("bio", bio);
+      petData.append("dietary", dietary);
 
       const token = JSON.parse(localStorage.getItem("token"));
       const res = await axios.post("http://localhost:8080/pet", petData, {
         headers: { authorization: `Bearer ${token}` },
       });
-      console.log(res.data);
+      setPetDetails({
+        picture: "",
+        type: "",
+        name: "",
+        breed: "",
+        adoptionStatus: "",
+        height: "",
+        weight: "",
+        hypoallergenic: "",
+        color:"",
+        bio:"",
+        dietary:""
+      });
       alert("Pet has been added");
     } catch (err) {
       console.log(err);
@@ -56,11 +67,12 @@ function AddPet() {
         </b>{" "}
         :
       </h1>
-      <Form >
+      <Form>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
+            value={name}
             placeholder="Pet's name"
             onChange={(e) =>
               setPetDetails({
@@ -107,47 +119,59 @@ function AddPet() {
             value={adoptionStatus}
             id="inputGroupSelect01"
             onChange={(e) =>
-                setPetDetails({
-                  ...petDetails,
-                  adoptionStatus: e.target.value,
-                })
-              }
+              setPetDetails({
+                ...petDetails,
+                adoptionStatus: e.target.value,
+              })
+            }
           >
             <option selected>Choose...</option>
-            <option value="available">Available</option>
-            <option value="fostered">Fostered</option>
-            <option value="adopted">Adopted</option>
+            <option value="Available">Available</option>
+            <option value="Fostered">Fostered</option>
+            <option value="Adopted">Adopted</option>
           </select>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Picture</Form.Label>
-          <input type="file" class="form-control" 
-          // onChange={(e) =>
-          //     setPetDetails({
-          //       ...petDetails,
-          //       picture: e.target.files,
-          //     })
-          //   }
-            onChange={(e) => setPetImage(e.target.files[0])} accept="image/*"></input>
+          <input
+            type="file"
+            class="form-control"
+            // onChange={(e) =>
+            //     setPetDetails({
+            //       ...petDetails,
+            //       picture: e.target.files,
+            //     })
+            //   }
+            onChange={(e) => setPetImage(e.target.files[0])}
+            accept="image/*"
+          ></input>
         </Form.Group>
         <div className="d-flex flex-row">
           <Form.Group className="mb-3 me-3 flex-fill">
             <Form.Label>Height in CM</Form.Label>
-            <Form.Control type="number" value={height} onChange={(e) =>
-              setPetDetails({
-                ...petDetails,
-                height: e.target.value,
-              })
-            } />
+            <Form.Control
+              type="number"
+              value={height}
+              onChange={(e) =>
+                setPetDetails({
+                  ...petDetails,
+                  height: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 me-3 flex-fill">
             <Form.Label>Weight in KG</Form.Label>
-            <Form.Control type="number" value={weight} onChange={(e) =>
-              setPetDetails({
-                ...petDetails,
-                weight: e.target.value,
-              })
-            }/>
+            <Form.Control
+              type="number"
+              value={weight}
+              onChange={(e) =>
+                setPetDetails({
+                  ...petDetails,
+                  weight: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 flex-fill">
             <Form.Label>Hypoallergenic</Form.Label>
@@ -175,11 +199,11 @@ function AddPet() {
             value={color}
             placeholder="Pet's fur color"
             onChange={(e) =>
-                setPetDetails({
-                  ...petDetails,
-                  color: e.target.value,
-                })
-              }
+              setPetDetails({
+                ...petDetails,
+                color: e.target.value,
+              })
+            }
           />
         </Form.Group>
         <Form.Group className="mb-3">
@@ -189,11 +213,11 @@ function AddPet() {
             value={bio}
             placeholder="A bit about the pet..."
             onChange={(e) =>
-                setPetDetails({
-                  ...petDetails,
-                  bio: e.target.value,
-                })
-              }
+              setPetDetails({
+                ...petDetails,
+                bio: e.target.value,
+              })
+            }
           />
         </Form.Group>
 
@@ -204,14 +228,16 @@ function AddPet() {
             value={dietary}
             placeholder="Pet's dietary needs"
             onChange={(e) =>
-                setPetDetails({
-                  ...petDetails,
-                  dietary: e.target.value,
-                })
-              }
+              setPetDetails({
+                ...petDetails,
+                dietary: e.target.value,
+              })
+            }
           />
         </Form.Group>
-        <button type="button" onClick={handleAddPet}>Add pet</button>
+        <button type="button" onClick={handleAddPet}>
+          Add pet
+        </button>
       </Form>
     </div>
   );
