@@ -37,7 +37,6 @@ function AddPet() {
       petData.append("dietary", dietary);
 
       const token = JSON.parse(localStorage.getItem("token"));
-      console.log(petDetails)
       const res = await axios.post("http://localhost:8080/pet", petData, {
         headers: { authorization: `Bearer ${token}` },
       });

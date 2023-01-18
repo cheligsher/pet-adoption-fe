@@ -6,8 +6,8 @@ function Dashboard() {
     
   return (
     <div>
-        <Pets />
         <Users />
+        <Pets />
     </div>
   )
 }
