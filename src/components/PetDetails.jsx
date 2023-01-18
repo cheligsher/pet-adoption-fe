@@ -18,9 +18,32 @@ function PetDetails({handleClose, show, selectedPet}) {
   };
 
   useEffect(() => {
-    getPetDetailsById();console.log(selectedPet)
-
+    getPetDetailsById();
+    console.log(selectedPet)
   }, [selectedPet]);
+
+  const handleAdopt = async(pet) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.post(`http://localhost:8080/pet/${pet._id}/adopt`, {}, {
+      headers: { authorization: `Bearer ${token}` },
+    })
+    console.log(res.data)
+  }
+
+  const handleFoster = async(pet) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.post(`http://localhost:8080/pet/${pet._id}/foster`, {}, {
+      headers: { authorization: `Bearer ${token}` },
+    })
+    console.log(res.data)
+  }
+
+  const handleSave = async(pet) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = axios.post(`http://localhost:8080/pet/${pet._id}/adopt`, {}, {
+      headers: { authorization: `Bearer ${token}` },
+    })
+  }
 
   return (
     <div>
@@ -52,8 +75,16 @@ function PetDetails({handleClose, show, selectedPet}) {
               <div>Hypoallergenic: {pet.hypoallergenic}</div>
               <div>Dietary Restrictions: {pet.dietary}</div>
               <div>Bio: {pet.bio}</div>
+              <div className="d-flex justify-content-evenly">
+
+              <button className="mt-2" onClick={() => handleAdopt(selectedPet)}>Adopt Pet</button>
+              <button className="mt-2" onClick={() => handleFoster(selectedPet)}>Foster Pet</button>
+              <button className="mt-2" onClick={() => handleSave(selectedPet)}>Save Pet</button>
+
+              </div>
             </div>
           )}
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

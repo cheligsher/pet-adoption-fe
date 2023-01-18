@@ -12,8 +12,12 @@ import Search from "./components/Search";
 import AppContext from "./context/AppContext";
 
 function App() {
-  const [user, setUser] = useState(false);
-  const [userDetails, setUserDetails] = useState({
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("token")) ? true : false);
+
+  
+  const [userDetails, setUserDetails] = useState(
+    JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")) : 
+    {
     email: "",
     phone: "",
     firstName: "",
@@ -25,11 +29,11 @@ function App() {
     type: "",
     name: "",
     breed: "",
-    adoptionStatus: "",
+    adoptionStatus: "Available",
     picture: "",
     height: "",
     weight: "",
-    hypoallergenic: false,
+    hypoallergenic: "Yes",
     color: "",
     bio: "",
     dietary: ""

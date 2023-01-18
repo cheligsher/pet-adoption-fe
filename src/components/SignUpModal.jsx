@@ -17,7 +17,7 @@ function SignUpModal({ show, handleClose, handleLoginShow }) {
       firstName: userDetails.firstName,
       lastName: userDetails.lastName,
     });
-    setUser(true);
+  
     handleClose();
     handleLoginShow()
   } catch(err){

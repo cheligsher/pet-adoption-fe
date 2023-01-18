@@ -10,6 +10,7 @@ function Users() {
         headers: { authorization: `Bearer ${token}` },
       });
       setUsers(allUsers.data);
+      console.log(allUsers.data)
     } catch (err) {
       console.log(err.message);
     }

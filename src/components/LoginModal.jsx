@@ -20,11 +20,20 @@ function LoginModal({ showLogin, handleLoginClose }) {
         setUser(true);
         handleLoginClose();
       }
-      setUserDetails({...userDetails, userId: res.data.userId})
+      const user = {
+        ...userDetails,
+        userId: res.data.userId,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+      }
+      setUserDetails(user);
+      localStorage.setItem("user", JSON.stringify(user))
+      // if theres a userid --> stay logged in?
     } catch (err) {
-      console.log(err)
-      if(err.response) {
-        alert(err.response.data)}
+      console.log(err);
+      if (err.response) {
+        alert(err.response.data);
+      }
     }
   };
   return (

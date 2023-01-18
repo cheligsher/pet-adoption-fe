@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PetDetails from "./PetDetails";
 import '../styles/main.css'
+import axios from "axios";
 
 function PetTable({ pets }) {
   const handleClose = () => setShow(false);
@@ -12,10 +13,10 @@ function PetTable({ pets }) {
    handleShow()
    setSelectedPet(pet)
   };
+  
   return (
     <div>
       <h3 className="text-center mx-auto">Pets</h3>
-      <div className="table-div">
         <div class="container text-center">
           <div class="row">
             {pets.length &&
@@ -33,7 +34,6 @@ function PetTable({ pets }) {
                 );
               })}
           </div>
-        </div>
       </div>
       <PetDetails handleClose={handleClose} show={show} selectedPet={selectedPet}/>
     </div>

@@ -5,6 +5,7 @@ import AppContext from "../context/AppContext";
 
 function AddPet() {
   // move state here
+  
   const { petDetails, setPetDetails } = useContext(AppContext);
   const {
     type,
@@ -36,6 +37,7 @@ function AddPet() {
       petData.append("dietary", dietary);
 
       const token = JSON.parse(localStorage.getItem("token"));
+      console.log(petDetails)
       const res = await axios.post("http://localhost:8080/pet", petData, {
         headers: { authorization: `Bearer ${token}` },
       });
@@ -44,7 +46,7 @@ function AddPet() {
         type: "",
         name: "",
         breed: "",
-        adoptionStatus: "",
+        adoptionStatus: "Available",
         height: "",
         weight: "",
         hypoallergenic: "",
@@ -69,7 +71,8 @@ function AddPet() {
       </h1>
       <Form>
         <Form.Group className="mb-3">
-          <Form.Label>Name</Form.Label>
+          <div className="my-3">* Required field</div>
+          <Form.Label>Name *</Form.Label>
           <Form.Control
             type="text"
             value={name}
@@ -84,7 +87,7 @@ function AddPet() {
         </Form.Group>
         <div className="d-flex flex-row">
           <Form.Group className="mb-3 me-3 flex-fill">
-            <Form.Label>Type</Form.Label>
+            <Form.Label>Type *</Form.Label>
             <Form.Control
               type="text"
               value={type}
@@ -98,7 +101,7 @@ function AddPet() {
             />
           </Form.Group>
           <Form.Group className="mb-3 flex-fill">
-            <Form.Label>Breed</Form.Label>
+            <Form.Label>Breed *</Form.Label>
             <Form.Control
               type="text"
               value={breed}
@@ -113,10 +116,10 @@ function AddPet() {
           </Form.Group>
         </div>
         <Form.Group className="mb-3">
-          <Form.Label>Adoption status</Form.Label>
+          <Form.Label>Adoption status *</Form.Label>
           <select
             class="form-select"
-            value={adoptionStatus}
+            
             id="inputGroupSelect01"
             onChange={(e) =>
               setPetDetails({
@@ -125,30 +128,23 @@ function AddPet() {
               })
             }
           >
-            <option selected>Choose...</option>
             <option value="Available">Available</option>
             <option value="Fostered">Fostered</option>
             <option value="Adopted">Adopted</option>
           </select>
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Picture</Form.Label>
+          <Form.Label>Picture *</Form.Label>
           <input
             type="file"
             class="form-control"
-            // onChange={(e) =>
-            //     setPetDetails({
-            //       ...petDetails,
-            //       picture: e.target.files,
-            //     })
-            //   }
             onChange={(e) => setPetImage(e.target.files[0])}
             accept="image/*"
           ></input>
         </Form.Group>
         <div className="d-flex flex-row">
           <Form.Group className="mb-3 me-3 flex-fill">
-            <Form.Label>Height in CM</Form.Label>
+            <Form.Label>Height in CM *</Form.Label>
             <Form.Control
               type="number"
               value={height}
@@ -161,7 +157,7 @@ function AddPet() {
             />
           </Form.Group>
           <Form.Group className="mb-3 me-3 flex-fill">
-            <Form.Label>Weight in KG</Form.Label>
+            <Form.Label>Weight in KG *</Form.Label>
             <Form.Control
               type="number"
               value={weight}
@@ -174,26 +170,24 @@ function AddPet() {
             />
           </Form.Group>
           <Form.Group className="mb-3 flex-fill">
-            <Form.Label>Hypoallergenic</Form.Label>
+            <Form.Label>Hypoallergenic *</Form.Label>
             <select
               class="form-select"
-              value={hypoallergenic}
               id="inputGroupSelect02"
               onChange={(e) =>
                 setPetDetails({
                   ...petDetails,
-                  hypoallergenic: true,
+                  hypoallergenic: e.target.value,
                 })
               }
             >
-              <option selected>Choose...</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option selected value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
           </Form.Group>
         </div>
         <Form.Group className="mb-3">
-          <Form.Label>Color</Form.Label>
+          <Form.Label>Color *</Form.Label>
           <Form.Control
             type="text"
             value={color}
@@ -222,7 +216,7 @@ function AddPet() {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Dietary restrictions</Form.Label>
+          <Form.Label>Dietary restrictions *</Form.Label>
           <Form.Control
             type="text"
             value={dietary}
