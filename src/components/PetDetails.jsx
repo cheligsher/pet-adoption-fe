@@ -69,8 +69,8 @@ function PetDetails({ handleClose, show, selectedPet }) {
         <Modal.Body>
           {pet && (
             <div id="pet-details d-flex">
-              <img src={pet.picture} alt="" id="pet-picture" />
-              <div className="d-flex flex-row justify-content-evenly mt-3">
+              <img src={pet.picture} alt="" id="pet-picture" className="mx-auto d-block"/>
+              <div className="d-flex flex-row justify-content-evenly mt-3 ">
                 <div>Name: {pet.name}</div>
                 <div>Status: {pet.adoptionStatus}</div>
               </div>
@@ -82,10 +82,10 @@ function PetDetails({ handleClose, show, selectedPet }) {
                 <div>Height: {pet.height} CM</div>
                 <div>Weight: {pet.weight} KG</div>
               </div>
-              <div>Colour: {pet.color}</div>
-              <div>Hypoallergenic: {pet.hypoallergenic}</div>
-              <div>Dietary Restrictions: {pet.dietary}</div>
-              <div>Bio: {pet.bio}</div>
+              <div className="text-center">Colour: {pet.color}</div>
+              <div className="text-center">Hypoallergenic: {pet.hypoallergenic}</div>
+              <div className="text-center">Dietary Restrictions: {pet.dietary}</div>
+              <div className="text-center">Bio: {pet.bio}</div>
               <div className="d-flex justify-content-evenly">
                 <button
                   className="mt-2"

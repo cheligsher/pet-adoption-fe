@@ -18,11 +18,11 @@ function PetTable({ pets }) {
     <div>
       <h3 className="text-center mx-auto">Pets</h3>
         <div className="container text-center">
-          <div className="row">
+          <div className="row row-cols-4">
             {pets.length &&
               pets.map((pet) => {
                 return (
-                  <div className="col mt-5 me-2 border border-dark">
+                  <div className="col mt-5 me-1 ms-1 border border-dark">
                     <div>{pet.type}</div>
                     <div>{pet.name}</div>
                     <div>{pet.breed}</div>

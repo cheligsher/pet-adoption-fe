@@ -3,6 +3,13 @@ footer {
   background-color: #deb887;
 }
 
+body{
+  background-image: url(/public/pets-main2.jpeg);
+  background-repeat: no-repeat;
+  background-size: 100vw 50vh;
+  background-position: bottom;
+}
+
 button {
   background-color: #deb887;
   border-radius: 5px;
