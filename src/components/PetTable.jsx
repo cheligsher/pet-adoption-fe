@@ -17,8 +17,8 @@ function PetTable({ pets }) {
   return (
     <div>
       <h3 className="text-center mx-auto">Pets</h3>
-        <div class="container text-center">
-          <div class="row">
+        <div className="container text-center">
+          <div className="row">
             {pets.length &&
               pets.map((pet) => {
                 return (

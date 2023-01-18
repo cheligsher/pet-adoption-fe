@@ -22,7 +22,7 @@ button {
   text-shadow: 4px 4px 5px #deb887;
 }
 
-.link-secondary{
+.link-secondary, #search-item{
   cursor: pointer;
 }
 

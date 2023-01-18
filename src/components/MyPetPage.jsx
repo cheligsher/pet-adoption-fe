@@ -25,10 +25,15 @@ function MyPetPage() {
 
   return (
     <div className="text-center mt-5">
-      {pets.adopted?.length &&
+      <h2>{pets.adopted.length ? "Here you can see the pets you've fostered or adopted!" : "You currently have no adopted or fostered pets :("}</h2>
+      <div className="d-flex flex-row">
+      {pets.adopted.length &&
         pets.adopted.map((pet) => {
-          return <PetCard pet={pet} />;
+          return (
+              <PetCard pet={pet} />
+          );
         })}
+            </div>
     </div>
   );
 }

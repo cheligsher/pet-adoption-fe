@@ -1,10 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import PetDetails from "./PetDetails";
 import SearchBar from "./SearchBar";
+import "../styles/main.css"
 
 function Search() {
   const [query, setQuery] = useState("");
   const [petList, setPetList] = useState([]);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  const [selectedPet, setSelectedPet] = useState("")
 
   const getAllPets = async () => {
     try {
@@ -19,7 +25,10 @@ function Search() {
     getAllPets();
   }, [query]);
 
-
+  const handleShowDetails = (pet) => {
+    handleShow()
+    setSelectedPet(pet)
+   };
   // when search, click on pet => navigate to pet page using _id
   return (
     <div className="w-75 text-center mx-auto mt-5">
@@ -47,13 +56,14 @@ function Search() {
           .filter((pet)=> pet.breed.toLowerCase().includes(query))
           .map((pet) => {
             return(
-            <li key={pet._id} className="list-group-item">
+            <li key={pet._id} className="list-group-item" id="search-item" onClick={()=>handleShowDetails(pet)}>
               {pet.breed}
             </li>
             )
           })
           }
       </ul>
+      <PetDetails handleClose={handleClose} show={show} selectedPet={selectedPet}/>
     </div>
   );
 }
