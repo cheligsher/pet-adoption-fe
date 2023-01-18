@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import AppContext from "../context/AppContext";
-import "../styles/main.css";
+// import "../styles/main.css";
 
 function Welcome({ handleLoginShow, handleShow }) {
   const { userDetails, user } = useContext(AppContext);
   const { firstName, lastName } = userDetails;
 
   return (
-    <div>
+    <div className="mt-5">
+      <div className="mt-5">
       {user && (
         <h1 className="pt-4">
           Hi {firstName} {lastName}!
@@ -40,6 +41,7 @@ function Welcome({ handleLoginShow, handleShow }) {
           Sign up
         </button>
       )}
+    </div>
     </div>
   );
 }

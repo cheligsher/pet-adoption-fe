@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import AppContext from "../context/AppContext";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function ProfileForm() {
   const { userDetails, setUserDetails } = useContext(AppContext);
@@ -20,9 +22,8 @@ function ProfileForm() {
       const user = await axios.put(`http://localhost:8080/user/${userId}`,updatedUser,{
         headers: { authorization: `Bearer ${token}` },
       })
-      console.log(user)
     } catch (err) {
-      console.log(err)
+      toast.error(err)
     }
   };
   return (

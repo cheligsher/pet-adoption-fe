@@ -5,11 +5,11 @@ import Dashboard from "./components/Dashboard";
 import Home from "./components/Home";
 import MyPetPage from "./components/MyPetPage";
 import Navbar from "./components/Navbar";
-import PetPage from "./components/PetPage";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
 import AppContext from "./context/AppContext";
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("token")) ? true : false);
@@ -63,14 +63,6 @@ function App() {
               }
             ></Route>
             <Route
-              path="/PetPage"
-              element={
-                <PrivateRoute>
-                  <PetPage />
-                </PrivateRoute>
-              }
-            ></Route>
-            <Route
               path="/Profile"
               element={
                 <PrivateRoute>
@@ -83,6 +75,7 @@ function App() {
             <Route path="/dash" element={<PrivateRoute><Dashboard /></PrivateRoute>}></Route>
           </Routes>
         </BrowserRouter>
+        <ToastContainer></ToastContainer>
       </AppContext.Provider>
     </div>
   );

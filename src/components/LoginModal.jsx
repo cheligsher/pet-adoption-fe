@@ -4,12 +4,18 @@ import axios from "axios";
 import AppContext from "../context/AppContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { ToastContainer, toast } from "react-toastify";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 function LoginModal({ showLogin, handleLoginClose }) {
   const { userDetails, setUserDetails, setUser } = useContext(AppContext);
   const { email, password } = userDetails;
+  const [loading, setLoading] = useState(false)
+
 
   const handleLogin = async () => {
+    setLoading(true)
     try {
       const res = await axios.post("http://localhost:8080/user/login", {
         email: email,
@@ -25,14 +31,15 @@ function LoginModal({ showLogin, handleLoginClose }) {
         userId: res.data.userId,
         firstName: res.data.firstName,
         lastName: res.data.lastName,
-      }
+      };
       setUserDetails(user);
-      localStorage.setItem("user", JSON.stringify(user))
-      // if theres a userid --> stay logged in?
+      localStorage.setItem("user", JSON.stringify(user));
+      setLoading(false)
+      toast.success("You are now logged in!");
     } catch (err) {
-      console.log(err);
+      setLoading(false)
       if (err.response) {
-        alert(err.response.data);
+        toast.error(err.response.data);
       }
     }
   };
@@ -68,6 +75,9 @@ function LoginModal({ showLogin, handleLoginClose }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
+        {loading === true && <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>}
           <Button variant="secondary" onClick={handleLoginClose}>
             Close
           </Button>

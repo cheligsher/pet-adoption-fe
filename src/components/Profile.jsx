@@ -19,9 +19,9 @@ function Profile() {
   
 
    return (
-    <div className="mt-5 w-50 mx-auto">
+    <div className="mt-4 w-50 mx-auto background p-3">
       <h3>
-        Welcome to your profile 
+        Welcome to your profile {" "}
         {firstName} {lastName} 🐾
       </h3>
       <p>

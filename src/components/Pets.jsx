@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/main.css";
 import PetDetails from "./PetDetails";
 import PetTable from "./PetTable";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Pets() {
   const [pets, setPets] = useState([]);
@@ -11,7 +13,7 @@ function Pets() {
       const allPets = await axios.get("http://localhost:8080/pet");
       setPets(allPets.data);
     } catch (err) {
-      console.log(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -19,7 +21,6 @@ function Pets() {
     getAllPets();
   }, []);
 
-  // link to PetDetails on click
   return (
     <div>
     <PetTable pets={pets} />

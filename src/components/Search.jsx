@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import PetDetails from "./PetDetails";
 import SearchBar from "./SearchBar";
 import "../styles/main.css"
+import { ToastContainer, toast } from 'react-toastify';
 
 function Search() {
   const [query, setQuery] = useState("");
@@ -17,7 +18,7 @@ function Search() {
       const allPets = await axios.get(`http://localhost:8080/pet?${query}`);
       setPetList(allPets.data);
     } catch (err) {
-      console.log(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -29,9 +30,10 @@ function Search() {
     handleShow()
     setSelectedPet(pet)
    };
+
   // when search, click on pet => navigate to pet page using _id
   return (
-    <div className="w-75 text-center mx-auto mt-5">
+    <div className="w-75 text-center mx-auto mt-5 background p-3">
       <h1 className="display-4 mb-3">
         Search{" "}
         <i>
@@ -46,17 +48,14 @@ function Search() {
           placeholder="Search pet by breed..."
           onChange={(e)=> setQuery(e.target.value)}
         />
-        <button className=" btn-outline-dark text-light" type="submit">
-          Search
-        </button>
       </form>
-      <ul className="list-group list-group-flush">
+      <ul className="list-group list-group-flush overflow-y">
         {petList.length &&
           petList
           .filter((pet)=> pet.breed.toLowerCase().includes(query))
           .map((pet) => {
             return(
-            <li key={pet._id} className="list-group-item cursor-pointer" onClick={()=>handleShowDetails(pet)}>
+            <li key={pet._id} className="list-group-item cursor-pointer transparent" onClick={()=>handleShowDetails(pet)}>
               {pet.breed}
             </li>
             )

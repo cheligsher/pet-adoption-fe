@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import AppContext from "../context/AppContext";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function SignUpModal({ show, handleClose, handleLoginShow }) {
   const { userDetails, setUser, setUserDetails } = useContext(AppContext)
@@ -19,9 +21,11 @@ function SignUpModal({ show, handleClose, handleLoginShow }) {
     });
   
     handleClose();
+    toast.success("You've been signed up!")
+    toast.info("Please log in to proceed")
     handleLoginShow()
   } catch(err){
-    alert(err.response.data);
+    toast.error(err.response.data);
     }
     
   }

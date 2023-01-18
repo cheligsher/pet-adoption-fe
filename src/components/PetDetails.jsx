@@ -1,20 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/main.css";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import AppContext from "../context/AppContext";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+  import Spinner from 'react-bootstrap/Spinner';
+
 
 function PetDetails({ handleClose, show, selectedPet }) {
+  const {user} = useContext(AppContext)
   const [pet, setPet] = useState({});
+  const [loading, setLoading] = useState(false)
+
 
   const getPetDetailsById = async () => {
+    setLoading(true)
+    try{
     const id = selectedPet._id;
     const token = localStorage.getItem("token");
     const res = await axios.get(`http://localhost:8080/pet/${id}`, {
       headers: { authorization: `Bearer ${token}` },
     });
     setPet(res.data);
-  };
+    setLoading(false)
+  }catch(err){
+    toast.error(err.message)
+  }
+};
 
   useEffect(() => {
     getPetDetailsById();
@@ -31,9 +45,9 @@ function PetDetails({ handleClose, show, selectedPet }) {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      alert(`${pet.name} has been successfully adopted!`)
+        toast.success(`${pet.name} has been successfully adopted!`)
     } catch (err) {
-      console.log(err);
+      toast.error(err.message);
     }
   };
 
@@ -46,7 +60,6 @@ function PetDetails({ handleClose, show, selectedPet }) {
         headers: { authorization: `Bearer ${token}` },
       }
     );
-    console.log(res.data);
   };
 
   const handleSave = async (pet) => {
@@ -60,6 +73,7 @@ function PetDetails({ handleClose, show, selectedPet }) {
     );
   };
 
+  
   return (
     <div>
       <Modal show={show} onHide={handleClose}>
@@ -67,6 +81,10 @@ function PetDetails({ handleClose, show, selectedPet }) {
           <Modal.Title>Pet details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        {loading === true && <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>}
+
           {pet && (
             <div id="pet-details d-flex">
               <img src={pet.picture} alt="" id="pet-picture" className="mx-auto d-block"/>
@@ -86,7 +104,7 @@ function PetDetails({ handleClose, show, selectedPet }) {
               <div className="text-center">Hypoallergenic: {pet.hypoallergenic}</div>
               <div className="text-center">Dietary Restrictions: {pet.dietary}</div>
               <div className="text-center">Bio: {pet.bio}</div>
-              <div className="d-flex justify-content-evenly">
+              {user && <div className="d-flex justify-content-evenly">
                 <button
                   className="mt-2"
                   onClick={() => handleAdopt(selectedPet)}
@@ -105,7 +123,7 @@ function PetDetails({ handleClose, show, selectedPet }) {
                 >
                   Save Pet
                 </button>
-              </div>
+              </div>}
             </div>
           )}
         </Modal.Body>

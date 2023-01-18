@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import AppContext from "../context/AppContext";
+import "../styles/main.css"
+import { ToastContainer, toast } from 'react-toastify';
+import Spinner from 'react-bootstrap/Spinner';
 
-function AddPet() {
-  // move state here
-  
+function AddPet() {  
   const { petDetails, setPetDetails } = useContext(AppContext);
+  const [loading, setLoading] = useState(false)
   const {
     type,
     name,
@@ -22,6 +24,7 @@ function AddPet() {
   } = petDetails;
   const [petImage, setPetImage] = useState("");
   const handleAddPet = async () => {
+    setLoading(true)
     try {
       const petData = new FormData();
       petData.append("picture", petImage);
@@ -53,14 +56,20 @@ function AddPet() {
         bio:"",
         dietary:""
       });
-      alert("Pet has been added");
+      setLoading(false)
+      toast.success("Pet has been added");
     } catch (err) {
-      console.log(err);
+      toast.error(err.message);
+      setLoading(false)
+
     }
   };
 
   return (
-    <div className="w-50 mx-auto mt-5 mb-5">
+    <div className="w-50 mx-auto mt-5 mb-5 background p-3">
+    {loading === true && <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>}
       <h1>
         Add a new pet to{" "}
         <b>
@@ -68,7 +77,7 @@ function AddPet() {
         </b>{" "}
         :
       </h1>
-      <Form>
+      <Form className="overflow-y">
         <Form.Group className="mb-3">
           <div className="my-3">* Required field</div>
           <Form.Label>Name *</Form.Label>

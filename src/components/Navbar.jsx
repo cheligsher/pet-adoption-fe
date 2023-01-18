@@ -3,6 +3,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/main.css";
 import { useContext } from "react";
 import AppContext from "../context/AppContext";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Navbar() {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ function Navbar() {
   };
 
   const handleLogOut = () => {
-    alert("You have successfully signed out. See you soon!")
+    toast.success("You have successfully signed out. See you soon!")
     setUser(false)
     localStorage.clear()
     navigate("/")

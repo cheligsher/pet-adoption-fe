@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../styles/main.css";
-import QuoteGallery from "./QuoteGallery";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import Welcome from "./Welcome";
@@ -14,11 +13,10 @@ function Home() {
   const handleLoginShow = () => setShowLogin(true);
 
   return (
-    <div className="mx-auto text-center mt-5">
+    <div className="mx-auto text-center mt-5 background w-75">
       <Welcome handleShow={handleShow} handleLoginShow={handleLoginShow} />
       <SignUpModal show={show} handleLoginShow={handleLoginShow} handleClose={handleClose} />
       <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
-      {/* <QuoteGallery /> */}
     </div>
   );
 }

@@ -25,6 +25,19 @@ button {
   padding: 0;
 }
 
+.overflow-y{
+  overflow-y: auto;
+  height: 65vh;
+}
+
+.background{
+  background-color: #deb88786;
+}
+
+.transparent{
+  background-color: transparent;
+}
+
 #adopt-a-pet {
   text-shadow: 4px 4px 5px #deb887;
 }
