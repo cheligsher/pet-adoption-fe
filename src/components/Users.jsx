@@ -1,8 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import UserDetails from "./UserDetails";
 
 function Users() {
   const [users, setUsers] = useState([]);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  const [selectedUser, setSelectedUser] = useState("")
+
   const getAllUsers = async() => {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
@@ -19,6 +26,11 @@ function Users() {
   useEffect(() => {
     getAllUsers();
   }, []);
+
+  const handleShowInfo = (user) => {
+    handleShow()
+    setSelectedUser(user)
+  }
 
   return (
     <div>
@@ -44,13 +56,14 @@ function Users() {
                   <td>{user.phone}</td>
                   <td>{user.email}</td>
                   {/* can access _id. check id _id = fetch id */}
-                  <button className="btn btn-dark">See more</button>
+                  <td onClick={()=>handleShowInfo(user)} className="cursor-pointer"><span>Info</span></td>
                 </tr>
               );
             })}
         </tbody>
       </table>
     </div>
+    <UserDetails handleClose={handleClose} show={show} selectedUser={selectedUser}/>
     </div>
        
   );

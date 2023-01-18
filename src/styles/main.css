@@ -22,8 +22,9 @@ button {
   text-shadow: 4px 4px 5px #deb887;
 }
 
-.link-secondary, #search-item{
+.cursor-pointer:hover{
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .container > .col {

@@ -56,7 +56,7 @@ function Search() {
           .filter((pet)=> pet.breed.toLowerCase().includes(query))
           .map((pet) => {
             return(
-            <li key={pet._id} className="list-group-item" id="search-item" onClick={()=>handleShowDetails(pet)}>
+            <li key={pet._id} className="list-group-item cursor-pointer" onClick={()=>handleShowDetails(pet)}>
               {pet.breed}
             </li>
             )
