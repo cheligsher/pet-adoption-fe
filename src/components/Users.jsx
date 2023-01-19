@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserDetails from "./UserDetails";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 function Users() {
@@ -35,7 +35,7 @@ function Users() {
   }
 
   return (
-    <div>
+    <div className="background">
  <h3 className="text-center mx-auto">Users</h3>
     <div className='table-div'>
       <table className="table w-75 mx-auto">

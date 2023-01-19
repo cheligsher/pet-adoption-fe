@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PetDetails from "./PetDetails";
-import SearchBar from "./SearchBar";
 import "../styles/main.css"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function Search() {
   const [query, setQuery] = useState("");

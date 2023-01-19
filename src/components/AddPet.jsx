@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import AppContext from "../context/AppContext";
 import "../styles/main.css"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
 
 function AddPet() {  

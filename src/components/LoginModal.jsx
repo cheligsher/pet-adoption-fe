@@ -4,7 +4,7 @@ import axios from "axios";
 import AppContext from "../context/AppContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Spinner from 'react-bootstrap/Spinner';
 
 

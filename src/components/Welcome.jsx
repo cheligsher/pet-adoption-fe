@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import AppContext from "../context/AppContext";
-// import "../styles/main.css";
 
 function Welcome({ handleLoginShow, handleShow }) {
   const { userDetails, user } = useContext(AppContext);

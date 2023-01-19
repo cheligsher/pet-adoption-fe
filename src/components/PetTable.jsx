@@ -15,7 +15,7 @@ function PetTable({ pets }) {
   };
   
   return (
-    <div>
+    <div className="background">
       <h3 className="text-center mx-auto">Pets</h3>
         <div className="container text-center">
           <div className="row row-cols-4">
