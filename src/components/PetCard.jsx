@@ -12,8 +12,7 @@ function PetCard({ pet }) {
   const fetchPetById = async (id) => {
     setLoading(true)
     try {
-      if (adoptedPet) return;
-      const pet = await axios.get(`http://localhost:80800/pet/${id}`);
+      const pet = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/pet/${id}`);
       setAdoptedPet(pet.data);
     } catch (err) {
       toast.error(err.message);
@@ -25,8 +24,7 @@ function PetCard({ pet }) {
     fetchPetById(pet);
   }, []);
   // define fostered & adopted
-  const petId = pet;
-  fetchPetById(petId);
+
   return (
     <div className="border border-dark my-3 mx-3 w-25 p-2">
           {loading === true && <Spinner animation="border" role="status">

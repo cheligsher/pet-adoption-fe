@@ -33,7 +33,7 @@ function MyPetPage() {
   }, []);
 
   return (
-    <div className="text-center mt-5">
+    <div className="text-center mt-5 background p-3">
       {loading === true && (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
@@ -43,10 +43,11 @@ function MyPetPage() {
       <h2>{pets?.length > 0 ? "Here you can see the pets you've fostered or adopted!" : "You currently have no adopted or fostered pets :("}</h2>
 
         <div className="d-flex flex-row">
-          {/* {pets?.length > 0 &&
+          {pets?.length > 0 &&
             pets.map((pet) => {
               return <PetCard pet={pet} />;
-            })} */}
+              
+            })}
         </div>
     </div>
   );
