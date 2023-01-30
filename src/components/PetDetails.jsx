@@ -13,13 +13,13 @@ function PetDetails({ handleClose, show, selectedPet }) {
   const {user} = useContext(AppContext)
   const [pet, setPet] = useState({});
   const [loading, setLoading] = useState(false)
+  const token = JSON.parse(localStorage.getItem("token"));
 
 
   const getPetDetailsById = async () => {
     setLoading(true)
     try{
     const id = selectedPet._id;
-    const token = localStorage.getItem("token");
     const res = await axios.get(`http://localhost:8080/pet/${id}`, {
       headers: { authorization: `Bearer ${token}` },
     });
@@ -37,7 +37,6 @@ function PetDetails({ handleClose, show, selectedPet }) {
 
   const handleAdopt = async (pet) => {
     try {
-      const token = JSON.parse(localStorage.getItem("token"));
       const res = await axios.post(
         `http://localhost:8080/pet/${pet._id}/adopt`,
         {},
@@ -47,23 +46,27 @@ function PetDetails({ handleClose, show, selectedPet }) {
       );
         toast.success(`${pet.name} has been successfully adopted!`)
     } catch (err) {
+      console.log(err)
       toast.error(err.message);
     }
   };
 
   const handleFoster = async (pet) => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    const res = await axios.post(
-      `http://localhost:8080/pet/${pet._id}/foster`,
-      {},
-      {
-        headers: { authorization: `Bearer ${token}` },
-      }
-    );
+    try {
+      console.log("handlefoster")
+      const res = await axios.post(
+        `http://localhost:8080/pet/${pet._id}/foster`,
+        {},
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+    } catch (err) {
+      toast.error(err.message)
+    }
   };
 
   const handleSave = async (pet) => {
-    const token = JSON.parse(localStorage.getItem("token"));
     const res = axios.post(
       `http://localhost:8080/pet/${pet._id}/adopt`,
       {},

@@ -9,7 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
 import AppContext from "./context/AppContext";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("token")) ? true : false);

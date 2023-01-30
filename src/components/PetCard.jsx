@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/main.css";
 import { toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
+const token = JSON.parse(localStorage.getItem("token"));
 
 
 function PetCard({ pet }) {
@@ -19,6 +20,20 @@ function PetCard({ pet }) {
     }
     setLoading(false)
   };
+
+  const handleReturn = async(id) => {
+    setLoading(true)
+    try {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/pet/${id}/return`,{},{
+        headers: { authorization: `Bearer ${token}` },
+      })
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+      toast.error(err.message)
+    }
+    setLoading(false)
+  }
 
   useEffect(() => {
     fetchPetById(pet);
@@ -50,7 +65,7 @@ function PetCard({ pet }) {
       <div>{adoptedPet.color}</div>
       <div>Dietary restrictions: {adoptedPet.dietary}</div>
       <div>{adoptedPet.bio ? <span>Bio : {adoptedPet.bio} </span> : ""}</div>
-      <button className="mt-2">Return Pet</button>
+      <button className="mt-2" onClick={()=>handleReturn(adoptedPet._id)}>Return Pet</button>
     </div>
   );
 }
