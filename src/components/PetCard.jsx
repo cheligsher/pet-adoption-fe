@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import "../styles/main.css";
 import { toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
-const token = JSON.parse(localStorage.getItem("token"));
-
 
 function PetCard({ pet }) {
   const [adoptedPet, setAdoptedPet] = useState("");
   const [loading, setLoading] = useState(false)
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const fetchPetById = async (id) => {
     setLoading(true)

@@ -53,7 +53,6 @@ function PetDetails({ handleClose, show, selectedPet }) {
 
   const handleFoster = async (pet) => {
     try {
-      console.log("handlefoster")
       const res = await axios.post(
         `http://localhost:8080/pet/${pet._id}/foster`,
         {},
