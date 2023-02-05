@@ -18,9 +18,6 @@ console.log(selectedPet)
           <Button variant="secondary" onClick={handleCloseEdit}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCloseEdit}>
-            Save Changes
-          </Button>
         </Modal.Footer>
       </Modal>
     </>

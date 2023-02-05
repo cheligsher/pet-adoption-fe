@@ -6,59 +6,79 @@ import "../styles/main.css"
 import { toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
 
-function AddPet({editPet, selectedPet}) {  
-  const { petDetails, setPetDetails } = useContext(AppContext);
+function AddPet(props) { 
+  const {editPet,type,
+        name,
+        breed,
+        adoptionStatus,
+        picture,
+        height,
+        weight,
+        hypoallergenic,
+        color,
+        bio,
+        dietary, _id} = props
+        console.log("props = ",props)
+  // const { petDetails, setPetDetails } = useContext(AppContext);
   const [loading, setLoading] = useState(false)
-  const {
-    type,
-    name,
-    breed,
-    adoptionStatus,
-    picture,
-    height,
-    weight,
-    hypoallergenic,
-    color,
-    bio,
-    dietary,
-  } = petDetails;
+  const [ petDetails, setPetDetails ] = useState({
+    picture: "",
+    type: type || "",
+    name: name || "",
+    breed: breed||"",
+    adoptionStatus: adoptionStatus||"Available",
+    height: height||"",
+    weight: weight||"",
+    hypoallergenic: hypoallergenic||"",
+    color: color|| "",
+    bio: bio||"",
+    dietary: bio|| ""})
+  // const {
+  //   type,
+  //   name,
+  //   breed,
+  //   adoptionStatus,
+  //   picture,
+  //   height,
+  //   weight,
+  //   hypoallergenic,
+  //   color,
+  //   bio,
+  //   dietary,
+  // } = petDetails;
   console.log(petDetails)
   const [petImage, setPetImage] = useState("");
   const handleAddPet = async () => {
     setLoading(true)
     try {
       const petData = new FormData();
-      petData.append("picture", petImage);
-      petData.append("type", type);
-      petData.append("name", name);
-      petData.append("breed", breed);
-      petData.append("adoptionStatus", adoptionStatus);
-      petData.append("height", height);
-      petData.append("weight", weight);
-      petData.append("hypoallergenic", hypoallergenic);
-      petData.append("color", color);
-      petData.append("bio", bio);
-      petData.append("dietary", dietary);
+      petData.append("picture", petDetails.petImage);
+      petData.append("type", petDetails.type);
+      petData.append("name", petDetails.name);
+      petData.append("breed", petDetails.breed);
+      petData.append("adoptionStatus", petDetails.adoptionStatus);
+      petData.append("height", petDetails.height);
+      petData.append("weight", petDetails.weight);
+      petData.append("hypoallergenic", petDetails.hypoallergenic);
+      petData.append("color", petDetails.color);
+      petData.append("bio", petDetails.bio);
+      petData.append("dietary", petDetails.dietary);
 
       const token = JSON.parse(localStorage.getItem("token"));
-      const res = await axios.post("http://localhost:8080/pet", petData, {
+      
+      if(!editPet){const res = await axios.post("http://localhost:8080/pet", petData, {
         headers: { authorization: `Bearer ${token}` },
-      });
-      setPetDetails({
-        picture: "",
-        type: "",
-        name: "",
-        breed: "",
-        adoptionStatus: "Available",
-        height: "",
-        weight: "",
-        hypoallergenic: "",
-        color:"",
-        bio:"",
-        dietary:""
       });
       setLoading(false)
       toast.success("Pet has been added");
+    }else{
+      const res = await axios.put(`http://localhost:8080/pet/${_id}`, petData, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      setLoading(false)
+      toast.success("Pet has been edited");
+    }
+
     } catch (err) {
       toast.error(err.message);
       setLoading(false)
@@ -84,7 +104,7 @@ function AddPet({editPet, selectedPet}) {
           <Form.Label>Name *</Form.Label>
           <Form.Control
             type="text"
-            value={name}
+            value={petDetails.name}
             placeholder="Pet's name"
             onChange={(e) =>
               setPetDetails({
@@ -99,7 +119,7 @@ function AddPet({editPet, selectedPet}) {
             <Form.Label>Type *</Form.Label>
             <Form.Control
               type="text"
-              value={type}
+              value={petDetails.type}
               placeholder="e.g. Dog, cat etc"
               onChange={(e) =>
                 setPetDetails({
@@ -113,7 +133,7 @@ function AddPet({editPet, selectedPet}) {
             <Form.Label>Breed *</Form.Label>
             <Form.Control
               type="text"
-              value={breed}
+              value={petDetails.breed}
               placeholder="e.g. Poodle, Chow"
               onChange={(e) =>
                 setPetDetails({
@@ -156,7 +176,7 @@ function AddPet({editPet, selectedPet}) {
             <Form.Label>Height in CM *</Form.Label>
             <Form.Control
               type="number"
-              value={height}
+              value={petDetails.height}
               onChange={(e) =>
                 setPetDetails({
                   ...petDetails,
@@ -169,7 +189,7 @@ function AddPet({editPet, selectedPet}) {
             <Form.Label>Weight in KG *</Form.Label>
             <Form.Control
               type="number"
-              value={weight}
+              value={petDetails.weight}
               onChange={(e) =>
                 setPetDetails({
                   ...petDetails,
@@ -199,7 +219,7 @@ function AddPet({editPet, selectedPet}) {
           <Form.Label>Color *</Form.Label>
           <Form.Control
             type="text"
-            value={color}
+            value={petDetails.color}
             placeholder="Pet's fur color"
             onChange={(e) =>
               setPetDetails({
@@ -213,7 +233,7 @@ function AddPet({editPet, selectedPet}) {
           <Form.Label>Bio</Form.Label>
           <Form.Control
             type="text"
-            value={bio}
+            value={petDetails.bio}
             placeholder="A bit about the pet..."
             onChange={(e) =>
               setPetDetails({
@@ -228,7 +248,7 @@ function AddPet({editPet, selectedPet}) {
           <Form.Label>Dietary restrictions *</Form.Label>
           <Form.Control
             type="text"
-            value={dietary}
+            value={petDetails.dietary}
             placeholder="Pet's dietary needs"
             onChange={(e) =>
               setPetDetails({
@@ -238,10 +258,10 @@ function AddPet({editPet, selectedPet}) {
             }
           />
         </Form.Group>
-        {!editPet ? <button type="button" onClick={handleAddPet}>
-          Add pet
-        </button> :
-        <button type="button" >Edit Pet</button>}
+        <button type="button" onClick={handleAddPet}>
+          {!editPet ? "Add pet" : "Edit pet"}
+        </button> 
+        
       </Form>
     </div>
   );
