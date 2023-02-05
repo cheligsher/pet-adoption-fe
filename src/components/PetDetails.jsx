@@ -7,6 +7,7 @@ import AppContext from "../context/AppContext";
 import { toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
   import Spinner from 'react-bootstrap/Spinner';
+import EditPetModal from "./EditPetModal";
 
 
 function PetDetails({ handleClose, show, selectedPet }) {
@@ -15,6 +16,10 @@ function PetDetails({ handleClose, show, selectedPet }) {
   const [loading, setLoading] = useState(false)
   const token = JSON.parse(localStorage.getItem("token"));
 
+
+  const [showEdit, setShowEdit] = useState(false);
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowEdit = () => setShowEdit(true);
 
   const getPetDetailsById = async () => {
     setLoading(true)
@@ -75,6 +80,10 @@ function PetDetails({ handleClose, show, selectedPet }) {
     );
   };
 
+  const editPet = () => {
+    handleShowEdit()
+    handleClose()
+  }
   
   return (
     <div>
@@ -133,11 +142,13 @@ function PetDetails({ handleClose, show, selectedPet }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={editPet}>
+            Edit pet
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <EditPetModal handleCloseEdit={handleCloseEdit} handleShowEdit={handleShowEdit} showEdit={showEdit} selectedPet={selectedPet}/>
     </div>
   );
 }

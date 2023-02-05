@@ -6,7 +6,7 @@ import "../styles/main.css"
 import { toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
 
-function AddPet() {  
+function AddPet({editPet, selectedPet}) {  
   const { petDetails, setPetDetails } = useContext(AppContext);
   const [loading, setLoading] = useState(false)
   const {
@@ -22,6 +22,7 @@ function AddPet() {
     bio,
     dietary,
   } = petDetails;
+  console.log(petDetails)
   const [petImage, setPetImage] = useState("");
   const handleAddPet = async () => {
     setLoading(true)
@@ -66,17 +67,17 @@ function AddPet() {
   };
 
   return (
-    <div className="w-50 mx-auto mt-5 mb-5 background p-3">
+    <div className={!editPet ? "w-50 mx-auto mt-5 mb-5 background p-3" : "w-100 h-100"}>
     {loading === true && <Spinner animation="border" role="status">
       <span className="visually-hidden">Loading...</span>
     </Spinner>}
-      <h1>
+      {!editPet && <h1>
         Add a new pet to{" "}
         <b>
           <i>Adopt A Pet</i>
         </b>{" "}
-        :
-      </h1>
+        
+      </h1>}
       <Form className="overflow-y">
         <Form.Group className="mb-3">
           <div className="my-3">* Required field</div>
@@ -237,9 +238,10 @@ function AddPet() {
             }
           />
         </Form.Group>
-        <button type="button" onClick={handleAddPet}>
+        {!editPet ? <button type="button" onClick={handleAddPet}>
           Add pet
-        </button>
+        </button> :
+        <button type="button" >Edit Pet</button>}
       </Form>
     </div>
   );

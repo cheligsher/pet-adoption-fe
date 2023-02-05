@@ -8,20 +8,23 @@ import Spinner from "react-bootstrap/Spinner";
 function MyPetPage() {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = JSON.parse(localStorage.getItem("token"));
-  const [pets, setPets] = useState([]);
+  const [pets, setPets] = useState({
+    adopted: [],
+    fostered: []
+  });
+  const allMyPets = [...pets.adopted,...pets.fostered]
   const [loading, setLoading] = useState(false);
   const fetchPets = async () => {
     setLoading(true);
     try {
-      // console.log(user,token)
       const res = await axios.get(
         `http://localhost:8080/pet/user/${user.userId}`,
         {
           headers: { authorization: `Bearer ${token}` },
         }
       );
-      console.log(res.data);
-      setPets(res.data.adopted);
+      console.log(res.data)
+      setPets(res.data);
     } catch (err) {
       toast.error(err.message);
     }
@@ -40,11 +43,11 @@ function MyPetPage() {
         </Spinner>
       )}
 
-      <h2>{pets?.length > 0 ? "Here you can see the pets you've fostered or adopted!" : "You currently have no adopted or fostered pets :("}</h2>
+      <h2>{allMyPets?.length > 0 ? "Here you can see the pets you've fostered or adopted!" : "You currently have no adopted or fostered pets :("}</h2>
 
         <div className="d-flex flex-row">
-          {pets?.length > 0 &&
-            pets.map((pet) => {
+          {allMyPets?.length > 0 &&
+            allMyPets.map((pet) => {
               return <PetCard pet={pet} />;
               
             })}
