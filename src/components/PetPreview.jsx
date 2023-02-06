@@ -6,7 +6,6 @@ function PetPreview({ pet, handleShowDetails }) {
       <img src={pet.picture} alt="" style={{width: "100px", height: "100px", borderRadius: "50%", border: "1px solid #a06921"}}/>
       <div>{pet.type}</div>
       <div>{pet.name}</div>
-      {/* <div>{pet.breed}</div> */}
       <div>{pet.adoptionStatus}</div>
       <button onClick={() => handleShowDetails(pet)}>Details</button>
     </div>
