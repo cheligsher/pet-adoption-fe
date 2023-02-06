@@ -37,10 +37,9 @@ function PetCard({ pet }) {
   useEffect(() => {
     fetchPetById(pet);
   }, []);
-  // define fostered & adopted
 
   return (
-    <div className="border border-dark my-3 mx-3 w-25 p-2">
+    <div className="border border-dark rounded my-3 mx-3 w-25 p-2">
           {loading === true && <Spinner animation="border" role="status">
       <span className="visually-hidden">Loading...</span>
     </Spinner>}
@@ -50,9 +49,9 @@ function PetCard({ pet }) {
         width={100}
         src={adoptedPet.picture}
         alt=""
-        className="border border-dark"
+        style={{width: "100px", height: "100px", borderRadius: "50%", border: "1px solid #a06921"}}
       />
-      <div>{adoptedPet.name}</div>
+      <div className="mt-2"><b>{adoptedPet.name}</b></div>
       <div>{adoptedPet.adoptionStatus}</div>
       <div>{adoptedPet.type}</div>
       <div>{adoptedPet.breed}</div>
