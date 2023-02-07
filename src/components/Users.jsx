@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserDetails from "./UserDetails";
 import { toast } from 'react-toastify';
+import { Table } from "react-bootstrap";
 
 
 function Users() {
@@ -38,7 +39,7 @@ function Users() {
     <div className="background">
  <h3 className="text-center mx-auto">Users</h3>
     <div className='table-div'>
-      <table className="table w-75 mx-auto">
+      <Table className="table w-75 mx-auto">
         <thead>
           <tr>
             <th scope="col">First name</th>
@@ -63,7 +64,7 @@ function Users() {
               );
             })}
         </tbody>
-      </table>
+      </Table>
     </div>
     <UserDetails handleClose={handleClose} show={show} selectedUser={selectedUser}/>
     </div>
