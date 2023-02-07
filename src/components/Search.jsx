@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PetDetails from "./PetDetails";
-import "../styles/main.css"
-import { toast } from 'react-toastify';
+import "../styles/main.css";
+import { toast } from "react-toastify";
+import PetPreview from "./PetPreview";
+import { Container, Row } from "react-bootstrap";
 
 function Search() {
   const [query, setQuery] = useState("Dog");
@@ -10,12 +12,14 @@ function Search() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
-  const [selectedPet, setSelectedPet] = useState("")
-  
+  const [selectedPet, setSelectedPet] = useState("");
+
   const getAllPets = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const allPets = await axios.get(`http://localhost:8080/pet/search/${query}`);
+      const allPets = await axios.get(
+        `http://localhost:8080/pet/search/${query}`
+      );
       setPetList(allPets.data);
     } catch (err) {
       toast.error(err.message);
@@ -23,13 +27,13 @@ function Search() {
   };
 
   const handleSelect = (e) => {
-    setQuery(e.target.value)
-  }
+    setQuery(e.target.value);
+  };
 
   const handleShowDetails = (pet) => {
-    handleShow()
-    setSelectedPet(pet)
-   };
+    handleShow();
+    setSelectedPet(pet);
+  };
 
   return (
     <div className="w-75 text-center mx-auto mt-5 background p-3">
@@ -47,19 +51,21 @@ function Search() {
         </select>
         <button type="submit">Search</button>
       </form>
-      <ul className="list-group list-group-flush overflow-y">
-        {petList.length>0 &&
-          petList
-          .map((pet) => {
-            return(
-            <li key={pet._id} className="list-group-item cursor-pointer transparent" onClick={()=>handleShowDetails(pet)}>
-              {pet.breed}
-            </li>
-            )
-          })
-          }
-      </ul>
-      <PetDetails handleClose={handleClose} show={show} selectedPet={selectedPet}/>
+      <Container className="overflow-y">
+        <Row xs={2} md={3} lg={4}>
+        {petList.length > 0 &&
+          petList.map((pet) => {
+            return (
+              <PetPreview pet={pet} handleShowDetails={handleShowDetails} />
+            );
+          })}
+      </Row>
+      </Container>
+      <PetDetails
+        handleClose={handleClose}
+        show={show}
+        selectedPet={selectedPet}
+      />
     </div>
   );
 }
