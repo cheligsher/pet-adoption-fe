@@ -1,38 +1,43 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import AppContext from "../context/AppContext";
-import "../styles/main.css"
-import { toast } from 'react-toastify';
-import Spinner from 'react-bootstrap/Spinner';
+import "../styles/main.css";
+import { toast } from "react-toastify";
+import Spinner from "react-bootstrap/Spinner";
 
-function AddPet(props) { 
-  const {editPet,type,
-        name,
-        breed,
-        adoptionStatus,
-        picture,
-        height,
-        weight,
-        hypoallergenic,
-        color,
-        bio,
-        dietary, _id} = props
-        console.log("props = ",props)
+function AddPet(props) {
+  const { user, setUser } = useContext(AppContext);
+  const {
+    editPet,
+    type,
+    name,
+    breed,
+    adoptionStatus,
+    picture,
+    height,
+    weight,
+    hypoallergenic,
+    color,
+    bio,
+    dietary,
+    _id,
+  } = props;
   // const { petDetails, setPetDetails } = useContext(AppContext);
-  const [loading, setLoading] = useState(false)
-  const [ petDetails, setPetDetails ] = useState({
+  const [loading, setLoading] = useState(false);
+  const [petDetails, setPetDetails] = useState({
     picture: "",
     type: type || "",
     name: name || "",
-    breed: breed||"",
-    adoptionStatus: adoptionStatus||"Available",
-    height: height||"",
-    weight: weight||"",
-    hypoallergenic: hypoallergenic||"",
-    color: color|| "",
-    bio: bio||"",
-    dietary: bio|| ""})
+    breed: breed || "",
+    adoptionStatus: adoptionStatus || "Available",
+    height: height || "",
+    weight: weight || "",
+    hypoallergenic: hypoallergenic || "",
+    color: color || "",
+    bio: bio || "",
+    dietary: bio || "",
+  });
   // const {
   //   type,
   //   name,
@@ -46,10 +51,12 @@ function AddPet(props) {
   //   bio,
   //   dietary,
   // } = petDetails;
-  console.log(petDetails)
+
+  const token = JSON.parse(localStorage.getItem("token"));
+
   const [petImage, setPetImage] = useState("");
   const handleAddPet = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const petData = new FormData();
       petData.append("picture", petDetails.petImage);
@@ -64,40 +71,66 @@ function AddPet(props) {
       petData.append("bio", petDetails.bio);
       petData.append("dietary", petDetails.dietary);
 
-      const token = JSON.parse(localStorage.getItem("token"));
-      
-      if(!editPet){const res = await axios.post("http://localhost:8080/pet", petData, {
-        headers: { authorization: `Bearer ${token}` },
-      });
-      setLoading(false)
-      toast.success("Pet has been added");
-    }else{
-      const res = await axios.put(`http://localhost:8080/pet/${_id}`, petData, {
-        headers: { authorization: `Bearer ${token}` },
-      });
-      setLoading(false)
-      toast.success("Pet has been edited");
-    }
-
+      if (!editPet) {
+        const res = await axios.post("http://localhost:8080/pet", petData, {
+          headers: { authorization: `Bearer ${token}` },
+        });
+        setLoading(false);
+        toast.success("Pet has been added");
+      } else {
+        const res = await axios.put(
+          `http://localhost:8080/pet/${_id}`,
+          petData,
+          {
+            headers: { authorization: `Bearer ${token}` },
+          }
+        );
+        setLoading(false);
+        toast.success("Pet has been edited");
+      }
     } catch (err) {
       toast.error(err.message);
-      setLoading(false)
-
+      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/user`, {
+          headers: { authorization: `Bearer ${token}` },
+        });
+        console.log("RES", res);
+      } catch (err) {
+        console.log("err", err);
+        if (err.response.data === "Invalid Token") {
+          setUser(false);
+          localStorage.clear();
+        }
+      }
+    };
+    verifyUser();
+  }, []);
+
   return (
-    <div className={!editPet ? "w-50 mx-auto mt-5 mb-5 background p-3" : "w-100 h-100"}>
-    {loading === true && <Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>}
-      {!editPet && <h1>
-        Add a new pet to{" "}
-        <b>
-          <i>Adopt A Pet</i>
-        </b>{" "}
-        
-      </h1>}
+    <div
+      className={
+        !editPet ? "w-50 mx-auto mt-5 mb-5 background p-3" : "w-100 h-100"
+      }
+    >
+      {loading === true && (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
+      {!editPet && (
+        <h1>
+          Add a new pet to{" "}
+          <b>
+            <i>Adopt A Pet</i>
+          </b>{" "}
+        </h1>
+      )}
       <Form className="overflow-y">
         <Form.Group className="mb-3">
           <div className="my-3">* Required field</div>
@@ -148,7 +181,6 @@ function AddPet(props) {
           <Form.Label>Adoption status *</Form.Label>
           <select
             class="form-select"
-            
             id="inputGroupSelect01"
             onChange={(e) =>
               setPetDetails({
@@ -210,7 +242,9 @@ function AddPet(props) {
                 })
               }
             >
-              <option selected value="Yes">Yes</option>
+              <option selected value="Yes">
+                Yes
+              </option>
               <option value="No">No</option>
             </select>
           </Form.Group>
@@ -260,8 +294,7 @@ function AddPet(props) {
         </Form.Group>
         <button type="button" onClick={handleAddPet}>
           {!editPet ? "Add pet" : "Edit pet"}
-        </button> 
-        
+        </button>
       </Form>
     </div>
   );

@@ -5,18 +5,39 @@ import AppContext from "../context/AppContext";
 import axios from "axios";
 
 function Profile() {
-  const [user, setUser] = useState("")
-  const { userDetails } = useContext(AppContext);
+
+  //fix userInfo naming
+  const token = JSON.parse(localStorage.getItem("token"));
+  const [userInfo, setUserInfo] = useState("")
+  const { userDetails, setUser } = useContext(AppContext);
   const { firstName, lastName } = userDetails;
   const fetchUserInfo = async() => {
  const userInfo = await axios.get(`http://localhost:8080/${userDetails.userId}`)
- setUser(userInfo)
+ setUserInfo(userInfo)
   }
 
   useEffect(() => {
     fetchUserInfo()
   }, [])
   
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/user`, {
+          headers: { authorization: `Bearer ${token}` },
+        });
+        console.log("RES", res);
+      } catch (err) {
+        console.log("err", err);
+        if (err.response.data === "Invalid Token") {
+          setUser(false);
+          localStorage.clear();
+        }
+      }
+    };
+    verifyUser();
+  }, []);
 
    return (
     <div className="mt-4 w-50 mx-auto background p-3">

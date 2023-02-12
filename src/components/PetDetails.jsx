@@ -52,7 +52,7 @@ function PetDetails({ handleClose, show, selectedPet }) {
         toast.success(`${pet.name} has been successfully adopted!`)
     } catch (err) {
       console.log(err)
-      toast.error(err.message);
+      toast.error(err.response.data);
     }
   };
 

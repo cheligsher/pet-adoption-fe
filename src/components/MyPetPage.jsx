@@ -4,8 +4,11 @@ import "../styles/main.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Spinner from "react-bootstrap/Spinner";
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
 
 function MyPetPage() {
+  const {setUser} = useContext(AppContext)
   const user = JSON.parse(localStorage.getItem("user"));
   const token = JSON.parse(localStorage.getItem("token"));
   const [pets, setPets] = useState({
@@ -33,6 +36,24 @@ function MyPetPage() {
 
   useEffect(() => {
     fetchPets();
+  }, []);
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/user`, {
+          headers: { authorization: `Bearer ${token}` },
+        });
+        console.log("RES", res);
+      } catch (err) {
+        console.log("err", err);
+        if (err.response.data === "Invalid Token") {
+          setUser(false);
+          localStorage.clear();
+        }
+      }
+    };
+    verifyUser();
   }, []);
 
   return (
