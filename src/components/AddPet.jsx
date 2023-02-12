@@ -100,9 +100,7 @@ function AddPet(props) {
         const res = await axios.get(`http://localhost:8080/user`, {
           headers: { authorization: `Bearer ${token}` },
         });
-        console.log("RES", res);
       } catch (err) {
-        console.log("err", err);
         if (err.response.data === "Invalid Token") {
           setUser(false);
           localStorage.clear();

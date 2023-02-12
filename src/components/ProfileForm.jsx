@@ -3,27 +3,37 @@ import AppContext from "../context/AppContext";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { useState } from "react";
 
 
 function ProfileForm() {
   const { userDetails, setUserDetails } = useContext(AppContext);
+  const [passwords, setPasswords] = useState({})
   const { firstName, lastName, email, phone } = userDetails;
+  const { newPassword, reNewPassword } = passwords
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const userId = "63c4142330dc3adac282631a"
+      const password = userDetails.password 
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user.userId
       const token = JSON.parse(localStorage.getItem("token"));
       const updatedUser = {
         firstName,
         lastName,
         email,
-        phone
+        phone,
+        password,
+        newPassword,
+        reNewPassword
       }
-      const user = await axios.put(`http://localhost:8080/user/${userId}`,updatedUser,{
+      await axios.put(`http://localhost:8080/user/${userId}`,updatedUser,{
         headers: { authorization: `Bearer ${token}` },
       })
+      toast.success("Your profile has been updated!")
     } catch (err) {
-      toast.error(err)
+      console.log("profile err", err)
+      toast.error(err.message)
     }
   };
   return (
@@ -92,8 +102,14 @@ function ProfileForm() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>New password</Form.Label>
-          <Form.Control type="password" placeholder="Your new password" />
+          <Form.Control type="password" placeholder="Your new password" value={newPassword}
+          onChange={(e)=> setPasswords({...passwords, newPassword: e.target.value})}/>
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Repeat new password</Form.Label>
+          <Form.Control type="password" placeholder="Repeat your new password" value={reNewPassword} onChange={(e)=> setPasswords({...passwords, reNewPassword: e.target.value})}/>
+        </Form.Group>
+
 
         {/* add bio etc! */}
 
