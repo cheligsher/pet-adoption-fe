@@ -5,7 +5,6 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import { useState } from "react";
 
-
 function ProfileForm() {
   const { userDetails, setUserDetails } = useContext(AppContext);
   const [passwords, setPasswords] = useState({})
